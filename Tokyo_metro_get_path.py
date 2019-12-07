@@ -163,19 +163,18 @@ with open('lines.csv','r') as fin:
 
 #read the information about transfer station
 trans_data = []
+def index_2D(list_2d, x):
+    for i, li in enumerate(list_2d):
+        if x in li:
+            return(i,li.index(x))
 with open('transitions.csv', 'r') as fin2:
     for line in fin2:
         temp = line.strip().split(';')
         trans_data.append([index_2D(station,temp[0]+temp[1]),index_2D(station,temp[2]+temp[3]),temp[4]])
 
-def index_2D(list_2d, x):
-    for i, li in enumerate(list_2d):
-        if x in li:
-            return(i,li.index(x))
-
 #get the start station and end station
-start = index_2D(station, input())
-end = index_2D(station, input())
+start = index_2D(station, input('start station: '))
+end = index_2D(station, input('end station: '))
 
 #add nodes of all stations
 for i in range(len(station)):
@@ -201,4 +200,4 @@ s = station[start[0]][start[1]]
 e = station[end[0]][end[1]]
 
 #get the result
-print([(weight, [n.data for n in node]) for (weight, node) in metro_graph.dijkstra(s, e) if node[-1] == e])
+print([('total time: about %d min' % weight, [n.data for n in node]) for (weight, node) in metro_graph.dijkstra(s, e) if node[-1] == e])
