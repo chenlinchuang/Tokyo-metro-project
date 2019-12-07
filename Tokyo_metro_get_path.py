@@ -5,7 +5,7 @@ class Node:
         self.index = indexloc
 
     def __str__(self):
-      return self.data
+        return self.data
         
        
 class Graph:
@@ -49,43 +49,43 @@ class Graph:
     # connections_from
     # Return value: array of tuples (node, weight)
     def connections_to(self, node):
-      node = self.get_index_from_node(node)
-      column = [row[node] for row in self.adj_mat]
-      return [(self.nodes[row_num], column[row_num]) for row_num in range(len(column)) if column[row_num] != 0]
+        node = self.get_index_from_node(node)
+        column = [row[node] for row in self.adj_mat]
+        return [(self.nodes[row_num], column[row_num]) for row_num in range(len(column)) if column[row_num] != 0]
      
   
     def print_adj_mat(self):
-      for row in self.adj_mat:
-          print(row)
+        for row in self.adj_mat:
+            print(row)
   
     def node(self, index):
-      return self.nodes[index]
+        return self.nodes[index]
     
   
     def remove_conn(self, node1, node2):
-      self.remove_conn_dir(node1, node2)
-      self.remove_conn_dir(node2, node1)
+        self.remove_conn_dir(node1, node2)
+        self.remove_conn_dir(node2, node1)
    
     # Remove connection in a directed manner (nod1 to node2)
     # Can accept index number OR node object
     def remove_conn_dir(self, node1, node2):
-      node1, node2 = self.get_index_from_node(node1), self.get_index_from_node(node2)
-      self.adj_mat[node1][node2] = 0   
+        node1, node2 = self.get_index_from_node(node1), self.get_index_from_node(node2)
+        self.adj_mat[node1][node2] = 0   
   
     # Can go from node 1 to node 2?
     def can_traverse_dir(self, node1, node2):
-      node1, node2 = self.get_index_from_node(node1), self.get_index_from_node(node2)
-      return self.adj_mat[node1][node2] != 0  
+        node1, node2 = self.get_index_from_node(node1), self.get_index_from_node(node2)
+        return self.adj_mat[node1][node2] != 0  
   
     def has_conn(self, node1, node2):
-      return self.can_traverse_dir(node1, node2) or self.can_traverse_dir(node2, node1)
+        return self.can_traverse_dir(node1, node2) or self.can_traverse_dir(node2, node1)
   
     def add_node(self,node):
-      self.nodes.append(node)
-      node.index = len(self.nodes) - 1
-      for row in self.adj_mat:
-        row.append(0)     
-      self.adj_mat.append([0] * (len(self.adj_mat) + 1))
+        self.nodes.append(node)
+        node.index = len(self.nodes) - 1
+        for row in self.adj_mat:
+            row.append(0)     
+        self.adj_mat.append([0] * (len(self.adj_mat) + 1))
 
     # Get the weight associated with travelling from n1
     # to n2. Can accept index numbers OR node objects
@@ -152,25 +152,26 @@ class Graph:
 data = list()
 station = list()
 with open('lines.csv','r') as fin:
-  for line in fin:
-    line.strip()
-    temp = line.split(';')
-    data.append(temp[3:])
-    station_nodes=list()
-    for i in range(int(temp[1]),int(temp[2])+1):
-      station_nodes.append('%s%02d' % (temp[0], i))
-    station.append(station_nodes)
+    for line in fin:
+      line.strip()
+      temp = line.split(';')
+      data.append(temp[3:])
+      station_nodes=list()
+      for i in range(int(temp[1]),int(temp[2])+1):
+          station_nodes.append('%s%02d' % (temp[0], i))
+      station.append(station_nodes)
 
 #read the information about transfer station
 trans_data = []
-def index_2D(list_2d, x):
-  for i, li in enumerate(list_2d):
-    if x in li:
-      return(i,li.index(x))
 with open('transitions.csv', 'r') as fin2:
-  for line in fin2:
-    temp = line.strip().split(';')
-    trans_data.append([index_2D(station,temp[0]+temp[1]),index_2D(station,temp[2]+temp[3]),temp[4]])
+    for line in fin2:
+        temp = line.strip().split(';')
+        trans_data.append([index_2D(station,temp[0]+temp[1]),index_2D(station,temp[2]+temp[3]),temp[4]])
+
+def index_2D(list_2d, x):
+    for i, li in enumerate(list_2d):
+        if x in li:
+            return(i,li.index(x))
 
 #get the start station and end station
 start = index_2D(station, input())
@@ -178,23 +179,23 @@ end = index_2D(station, input())
 
 #add nodes of all stations
 for i in range(len(station)):
-  for j in range(len(station[i])):
-    station[i][j] = Node(station[i][j])
+    for j in range(len(station[i])):
+        station[i][j] = Node(station[i][j])
 
 #setup the adjacent matrix
 station_ravel = list()
 for s in station:
-  station_ravel += s
+    station_ravel += s
 metro_graph = Graph.create_from_nodes(station_ravel)
 
 #setup all connections between stations
 for i in range(len(data)):
-  for j in range(len(data[i])):
-    metro_graph.connect(station[i][j], station[i][j+1], int(data[i][j]))
+    for j in range(len(data[i])):
+        metro_graph.connect(station[i][j], station[i][j+1], int(data[i][j]))
 
 #setup transfer time between two platform in each transfer station
 for trans in trans_data:
-  metro_graph.connect(station[trans[0][0]][trans[0][1]], station[trans[1][0]][trans[1][1]], int(trans[2]))
+    metro_graph.connect(station[trans[0][0]][trans[0][1]], station[trans[1][0]][trans[1][1]], int(trans[2]))
 
 s = station[start[0]][start[1]]
 e = station[end[0]][end[1]]
