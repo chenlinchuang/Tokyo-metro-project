@@ -133,8 +133,6 @@ class Graph:
             # Add min distance node to seen, remove from queue
             queue.remove(min_node)
             seen.add(min_node)
-            if end.index in seen: return dist
-            if end in seen: return dist[end]
             # Get all next hops 
             connections = self.connections_from(min_node)
             # For each connection, update its path and total distance from 
@@ -146,6 +144,7 @@ class Graph:
                     dist[node.index][0] = tot_dist
                     dist[node.index][1] = list(dist[min_node][1])
                     dist[node.index][1].append(node)
+            if end.index in seen: return dist
         return dist
 
 # read the information of each metro line
