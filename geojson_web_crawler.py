@@ -43,3 +43,14 @@ search_elem = browser.find_element_by_css_selector("div.CodeMirror textarea")
 # Delete preset code in textarea
 search_elem.send_keys(Keys.CONTROL + "a")
 search_elem.send_keys(Keys.DELETE)
+
+# XQuery language
+# Overpass QL
+search_elem.send_keys('[out:xml][timeout:25];' +           # output format:xml                               
+'rel(id: ' +                                               # relation attribute
+    ','.join(id_list) +                                    # Give relations according to id_list
+'); \
+out meta; \
+>; \
+out meta qt; \
+')
