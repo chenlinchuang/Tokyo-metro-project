@@ -30,3 +30,16 @@ for id2 in id_elem2:
     id_list.append(id2.text)            # Text is the string attribute of relations
 
 id_list = [id.lstrip() for id in id_list]
+
+### Main code
+# Access overpass api by url_browser
+url_overpass = 'https://overpass-turbo.eu/'
+browser.get(url_overpass)
+
+# Css selector process to avoid textarea hidden caused by xpath
+# Textarea is an attribute whose main function belongs to class div, name "CodeMirror"
+search_elem = browser.find_element_by_css_selector("div.CodeMirror textarea")
+
+# Delete preset code in textarea
+search_elem.send_keys(Keys.CONTROL + "a")
+search_elem.send_keys(Keys.DELETE)
