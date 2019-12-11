@@ -65,7 +65,7 @@ browser.find_element_by_xpath("/html/body/div[@id='navs']/div[@class='nav']/div[
 time.sleep(3)
 # Geojson format is on the top of 'export' class ---> clarify by single element is executable
 browser.find_element_by_class_name('export').click()
-time.sleep(5)
-browser.quit()
+#time.sleep(5)
+#browser.quit()
 
 #export.geojson in the desktop

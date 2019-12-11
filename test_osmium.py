@@ -56,9 +56,9 @@ R = RelationHandler()
 G = WayHandler()
 H = NodeHandler()
 
-R.apply_file('export.osm')
-G.apply_file('export.osm')
-H.apply_file('export.osm')
+R.apply_file('export (2).osm')
+G.apply_file('export (2).osm')
+H.apply_file('export (2).osm')
 
 #print(all_node_list)
 #print(WayHandler.all_way_dict)
@@ -93,16 +93,38 @@ for i in range(len(all_way_list)):
     count = 1
     while 1 <= count < len(all_way_list[i].big_list):
         #print(all_way_list[i].big_list[k][0])
+
         if all_way_list[i].big_list[0][-1] == all_way_list[i].big_list[count][0]:
             all_way_list[i].big_list[0].pop()
             all_way_list[i].big_list[0] += all_way_list[i].big_list[count]
             count = 0
-        if all_way_list[i].big_list[0][0] == all_way_list[i].big_list[count][-1]:
+        if count == len(all_way_list[i].big_list) -1:
+            while 1 <= count < len(all_way_list[i].big_list):
+                if all_way_list[i].big_list[0][-1] == all_way_list[i].big_list[count][-1]:
+                    all_way_list[i].big_list[0].pop()
+                    all_way_list[i].big_list[0] += all_way_list[i].big_list[count][::-1]
+                    count = 0
+
+        count += 1
+    while 1 <= count < len(all_way_list[i].big_list):
+
+        if all_way_list[i].big_list[0][0] == all_way_list[i].big_list[count][0]:
+            all_way_list[i].big_list[0].pop(0)
+            all_way_list[i].big_list[0] = all_way_list[i].big_list[count][::-1] + all_way_list[i].big_list[0]
+            count = 0
+        elif all_way_list[i].big_list[0][0] == all_way_list[i].big_list[count][-1]:
             all_way_list[i].big_list[0].pop(0)
             all_way_list[i].big_list[0] = all_way_list[i].big_list[count] + all_way_list[i].big_list[0]
-            count = 0        
+            count = 0
+
         count += 1
-print(all_way_list[1].big_list[0])
+
+    
+    count = 1
+    
+
+    
+print(all_way_list[0].big_list[0])
 
 #print(all_way_list[0].big_list[0])
 #for node in all_node_list:
