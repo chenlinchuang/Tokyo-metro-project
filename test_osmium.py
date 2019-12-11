@@ -175,7 +175,7 @@ for node in all_node_list:
         print(node.name)
         
 # Test
-print(countWaydistance(ReturnWay(get_node_id('C05'),get_node_id('C04'))))
+print(countWaydistance(ReturnWay(get_node_id('C04'),get_node_id('C05'))))
 
 
 
