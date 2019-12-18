@@ -1,6 +1,11 @@
 import osmium as o
 import sys
 from haversine import haversine, Unit
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
+from io import StringIO, BytesIO
+
 class RelationHandler(o.SimpleHandler):
     relation_way_dict = {}
     relation_node_dict = {}
@@ -17,8 +22,8 @@ class RelationHandler(o.SimpleHandler):
                 node_id_list.append(member.ref)
                 #print(node_id_list)
         #print(w.id)
-        RelationHandler.relation_way_dict[w.id] = way_id_list
-        RelationHandler.relation_node_dict[w.id] = node_id_list
+        RelationHandler.relation_way_dict[w.tags.get('ref')] = way_id_list
+        RelationHandler.relation_node_dict[w.tags.get('ref')] = node_id_list
 
 class Node:
     def __init__(self, id, name, location, ref, isTransferStation, stop):
@@ -63,6 +68,9 @@ H.apply_file('export.osm')
 #print(all_node_list)
 #print(WayHandler.all_way_dict)
 
+
+
+
 #print(RelationHandler.relation_way_dict)
 class Relation_way:
     def __init__(self,id,big_list):
@@ -86,6 +94,7 @@ call = 0
 
 count = 1
 #print(all_way_list[0].id)
+
 
 '''
     for way in all_way_list[0].big_list:
@@ -130,6 +139,12 @@ def ReturnWay(Node1,Node2):
                             way += all_way_list[relation_count].big_list[count]
                             #print(way)
                             count = 0
+                        count += 1
+                    count = 0
+                    while 0 <= count < len(all_way_list[relation_count].big_list):
+                        if count == way_index:
+                            count += 1
+                            continue
                         if way[0] == all_way_list[relation_count].big_list[count][-1]:
                             way.pop(0)
                             way = all_way_list[relation_count].big_list[count] + way
@@ -138,11 +153,11 @@ def ReturnWay(Node1,Node2):
                         count += 1
                     #print(way)
                     
-                    if way.index(Node1) > way.index(Node2):
-                        way = way[way.index(Node2):way.index(Node1)+1]
-                    else:
-                        way = way[way.index(Node1):way.index(Node2)+1]
-                    return way
+                if way.index(Node1) > way.index(Node2):
+                    way = way[way.index(Node2):way.index(Node1)+1]
+                else:
+                    way = way[way.index(Node1):way.index(Node2)+1]
+                return way
 
 def countWaydistance(way):
     '''
@@ -168,14 +183,120 @@ def get_node_id(node_ref):
         if node.ref == node_ref:
             return node.id
 
+def get_node_type(node_id):
+    '''
+    input : node id
+    output : node type switch boolean
+    '''
+    for node in all_node_list:
+        if node.id == node_id:
+            if node.stop == 'switch':
+                return False
+'''
+def get_ref(name):
+    search_elem[0].send_keys(Keys.CONTROL + "a")
+    search_elem[0].send_keys(Keys.DELETE)
+    # XQuery language
+    # Overpass QL
+    search_elem[0].send_keys('[out:xml][timeout:25];' +           # output format:xml                               
+    '(' + 'node["name"="'+
+     name +
+     '"]["station" = "subway"]\n' +
+    '(35.4,139.5,36.0,140.0);\n' +
+    '); \
+    out; \
+    >; \
+    out skel qt; \
+    ')
 
+    # Run overpass API
+    search_elem[0].send_keys(Keys.CONTROL,Keys.ENTER)
+    time.sleep(5)
+    search_elem[1].send_keys(Keys.CONTROL + "a")
+    new = search_elem[1].get_attribute('value').split('ref')
+    try:
+        return new[1].split('"')[2]
+    except IndexError:
+        return 'No reference'
+
+
+def ref_update(name,ref):
+    for elem in root.findall('.//node'):
+        if elem.findall('.//tag[@v = "'+ name +'"]'):
+            if elem.findall('.//tag[@v = "ref"]'):
+                break
+            else:
+                ref_element = etree.Element('tag', {'k':'ref','v':ref})
+                elem.append(ref_element)
+    tree.write('export.osm',encoding="utf-8",pretty_print=True)
+'''
+del_way_list =[]
+for way in WayHandler.all_way_dict.keys():
+    #print(get_node_type(WayHandler.all_way_dict[way][0]))
+    if get_node_type(WayHandler.all_way_dict[way][0]) == True and get_node_type(WayHandler.all_way_dict[way][-1]) == True:
+        del_way_list.append(way)
+
+for way in del_way_list:
+    del WayHandler.all_way_dict[way]
+
+
+
+
+
+get_ref_node_list =[]
 # find station without reference
 for node in all_node_list:
     if node.ref == None and node.stop == 'stop':
-        print(node.name)
-        
+        get_ref_node_list.append(node.name)
+
+get_ref_node_list = list(set(get_ref_node_list))
+#print(get_ref_node_list)
+
+# split station with multiple reference
+def ref_split(node):
+    '''
+    input: class object Node
+    output: None, change class object Node's reference to its belongings
+    '''
+    if ';' in str(node.ref):
+        ref_list = node.ref.split(';')
+        node.ref = []
+        for rel_id in RelationHandler.relation_node_dict.keys():
+            if node.id in RelationHandler.relation_node_dict[rel_id]:
+                for ref in ref_list:
+                    if str(rel_id) in ref:
+                        node.ref.append(ref)
+        if len(node.ref) == 1 :
+            node.ref = ''.join(node.ref)
+            print(node.ref)
+        else :
+            node.ref = ';'.join(node.ref)
+            print(node.ref)
+
+
+
+
+for node in all_node_list:
+    ref_split(node)
+
+
+
+
+
+
+G_list = ['G01','G02','G03','G04','G05','G06','G07','G08','G09','G10','G11','G12','G13','G14','G15','G16','G17','G18','G19']
+G_distance_list =[]
+
+#print(get_node_id(G_list[1]))
+for i,j in zip(range(len(G_list)-1),range(1,len(G_list))):
+    G_distance_list.append(countWaydistance(ReturnWay(get_node_id(G_list[i]),get_node_id(G_list[j]))))
+
+#print(G_distance_list)
+
+
+
 # Test
-print(countWaydistance(ReturnWay(get_node_id('F13'),get_node_id('F14'))))
+#print(countWaydistance(ReturnWay(get_node_id('F13'),get_node_id('F14'))))
 
 
 
