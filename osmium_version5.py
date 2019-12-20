@@ -153,11 +153,11 @@ def ReturnWay(Node1,Node2):
                         count += 1
                     #print(way)
                     
-                if way.index(Node1) > way.index(Node2):
-                    way = way[way.index(Node2):way.index(Node1)+1]
-                else:
-                    way = way[way.index(Node1):way.index(Node2)+1]
-                return way
+                    if way.index(Node1) > way.index(Node2):
+                        way = way[way.index(Node2):way.index(Node1)+1]
+                    else:
+                        way = way[way.index(Node1):way.index(Node2)+1]
+                    return way
 
 def countWaydistance(way):
     '''
@@ -284,7 +284,7 @@ for node in all_node_list:
 
 
 
-G_list = ['G01','G02','G03','G04','G05','G06','G07','G08','G09','G10','G11','G12','G13','G14','G15','G16','G17','G18','G19']
+G_list = ['G04','G05','G06','G07','G08','G09','G10','G11','G12','G13','G14','G15','G16','G17','G18','G19']
 G_distance_list =[]
 
 #print(get_node_id(G_list[1]))
