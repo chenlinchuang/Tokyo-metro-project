@@ -1,6 +1,7 @@
 import tkinter as tk
 import time
 import datetime
+import cv2
 from PIL import Image, ImageTk
 class Node:
 
@@ -10,7 +11,6 @@ class Node:
     
     def __str__(self):
         return self.ref
-
 
 class Graph:
 
@@ -22,8 +22,6 @@ class Graph:
         #set up a adjacency matrix
         self.adj_mat = [[0]*len(node_list) for _ in range(len(node_list))]
         self.all_nodes = node_list
-
-    
     #connect node1 and node2
     #update the adjacency matrix
     def connect_node(self, node1, node2, weight=1):
@@ -39,7 +37,6 @@ class Graph:
     def get_node_from_index(self, index):
         return self.all_nodes[index]
     
-
     def __str__(self):
         matrix = str([x.ref for x in self.all_nodes]) + '\n'
         for i in self.adj_mat:
@@ -58,7 +55,6 @@ class Graph:
             #asign 0 to the additional argument
             dist[i].append(0)
             dist[i].append([start_node])
-
         #set the start node distance as 0
         dist[start_node.index][0] = 0
         #integers in the queue correspond to indices of node 
@@ -74,11 +70,9 @@ class Graph:
                 if dist[n][0]+dist[n][1] < min_dist and n not in seen:
                     min_dist = dist[n][0]
                     min_node = n
-            
             #add min distance node to seen, and remove it from queue
             quene.remove(min_node)
             seen.add(min_node)
-
             #get all next hops
             connections = self.connection(self.get_node_from_index(min_node))
             #for each connection, update its path and total distance form
@@ -137,8 +131,8 @@ with open('transitions.csv', 'r') as fin2:
 
 
 #get the start station and end station
+'''
 initial = tk.Tk()
-#initial.tk.call('wm','iconphoto', initial._w, tk.PhotoImage(file='icon.png'))
 initial.configure(background='white')
 initial.title('Tokyo_metro_app')
 initial.attributes("-fullscreen", True)
@@ -150,13 +144,41 @@ c.create_image(initial.winfo_screenwidth()/2, initial.winfo_screenheight()/2+100
 c.place(x=0, y=0)
 initial.after(5000, lambda: initial.destroy()) # Destroy the widget after 30 seconds
 initial.mainloop()
+'''
+root = tk.Tk()
+root.configure(background='white')
+# Create a frame
+app = tk.Frame(root, bg="white")
+app.place(x=root.winfo_screenwidth()/2, y=root.winfo_screenheight()/2, anchor='center')
+# Create a label in the frame
+lmain = tk.Label(app)
+lmain.grid()
+
+cap = cv2.VideoCapture('op.mp4')
+
+# function for video streaming
+def video_stream():
+    _, frame = cap.read()
+    cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+    img = Image.fromarray(cv2image)
+    imgtk = ImageTk.PhotoImage(image=img)
+    lmain.imgtk = imgtk
+    lmain.configure(image=imgtk, bg = 'white')
+    lmain.after(1, video_stream) 
+
+video_stream()
+root.attributes("-fullscreen", True)
+root.after(6000, lambda: root.destroy())
+root.mainloop()
 
 window = tk.Tk()
 window.tk.call('wm','iconphoto', window._w, tk.PhotoImage(file='icon.png'))
 window.title('Tokyo_metro_app')
 window.geometry('640x640')
-tk.Label(window, text='From',fg='white', bg='steel blue', font=('Arial', 12), height=1, width=6).place(x=0, y=0)
-tk.Label(window, text='To',fg='white', bg='medium violet red', font=('Arial', 12), height=1, width=6).place(x=0, y=30)
+tk.Label(window, text='From',fg='white', bg='steel blue',
+         font=('Arial', 12), height=1, width=6).place(x=0, y=0)
+tk.Label(window, text='To',fg='white', bg='medium violet red', 
+         font=('Arial', 12), height=1, width=6).place(x=0, y=30)
 
 svar = tk.StringVar()
 svar.set('G01')
@@ -195,30 +217,35 @@ relation_dict = {'G': 'Ginza Line', 'M':'Marunouchi Line','Mb':'Marunouchi Line 
 class ScrollFrame(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent) # create a frame (self)
-
-        self.canvas = tk.Canvas(self, borderwidth=0)          #place canvas on self
-        self.viewPort = tk.Frame(self.canvas)                    #place a frame on the canvas, this frame will hold the child widgets 
-        self.vsb = tk.Scrollbar(self, orient="vertical", command=self.canvas.yview) #place a scrollbar on self 
-        self.canvas.configure(yscrollcommand=self.vsb.set)                          #attach scrollbar action to scroll of canvas
-
-        self.vsb.pack(side="left", fill="y")                                       #pack scrollbar to right of self
-        self.canvas.pack(side="left", fill="both", expand=True)                     #pack canvas to left of self and expand to fil
-        self.canvas_window = self.canvas.create_window((4,4), window=self.viewPort, anchor="nw",            #add view port frame to canvas
-                                  tags="self.viewPort")
-
-        self.viewPort.bind("<Configure>", self.onFrameConfigure)                       #bind an event whenever the size of the viewPort frame changes.
-        self.canvas.bind("<Configure>", self.onCanvasConfigure)                       #bind an event whenever the size of the viewPort frame changes.
-
-        self.onFrameConfigure(None)                                                 #perform an initial stretch on render, otherwise the scroll region has a tiny border until the first resize
+        #place canvas on self
+        self.canvas = tk.Canvas(self, borderwidth=0)
+        #place a frame on the canvas, this frame will hold the child widgets 
+        self.viewPort = tk.Frame(self.canvas)
+        #place a scrollbar on self
+        self.vsb = tk.Scrollbar(self, orient="vertical", command=self.canvas.yview)         
+        self.canvas.configure(yscrollcommand=self.vsb.set)
+        #pack scrollbar to right of self
+        self.vsb.pack(side="left", fill="y")
+        #pack canvas to left of self and expand to fil
+        self.canvas.pack(side="left", fill="both", expand=True)
+        #add view port frame to canvas
+        self.canvas_window = self.canvas.create_window((4,4), window=self.viewPort, anchor="nw", tags="self.viewPort")
+        #bind an event whenever the size of the viewPort frame changes.
+        self.viewPort.bind("<Configure>", self.onFrameConfigure)
+        self.canvas.bind("<Configure>", self.onCanvasConfigure)
+        #perform an initial stretch on render, otherwise the scroll region has a tiny border until the first resize
+        self.onFrameConfigure(None)
 
     def onFrameConfigure(self, event):                                              
         '''Reset the scroll region to encompass the inner frame'''
-        self.canvas.configure(scrollregion=self.canvas.bbox("all"))                 #whenever the size of the frame changes, alter the scroll region respectively.
+        #whenever the size of the frame changes, alter the scroll region respectively.
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
     def onCanvasConfigure(self, event):
         '''Reset the canvas window to encompass inner frame when required'''
         canvas_width = event.width
-        self.canvas.itemconfig(self.canvas_window, width = canvas_width)            #whenever the size of the canvas changes alter the window region respectively.
+        #whenever the size of the canvas changes alter the window region respectively.
+        self.canvas.itemconfig(self.canvas_window, width = canvas_width)
 
 class Usage(tk.Frame):
     def __init__(self, root, trans, trans_time):
@@ -227,12 +254,8 @@ class Usage(tk.Frame):
         self.scrollFrame = ScrollFrame(self) # add a new scrollable frame.
         self.trans = trans
         self.trans_time = trans_time
-        # Now add some controls to the scrollframe. 
-        # NOTE: the child controls are added to the view port (scrollFrame.viewPort, NOT scrollframe itself)
-        
-        #x = tk.Label(self.scrollFrame.viewPort, text = 'try')
-        #x.grid(row=0,column=0)
-
+        # add some controls to the scrollframe. 
+        # the child controls are added to the view port (scrollFrame.viewPort, NOT scrollframe itself)
         count = 0
         start_is_trans = False
         if trans[0] == trans[1]:
@@ -247,8 +270,6 @@ class Usage(tk.Frame):
             trans = trans[2:]
             trans_time=trans_time[1:]
 
-    
-    
         for i in range(len(trans)//2):
             if i == (len(trans)//2)-1 and trans[-1] == trans[-2]:
                 break
@@ -263,8 +284,6 @@ class Usage(tk.Frame):
             canvas.create_text(50,135,text=trans[count+1], anchor='nw', fill='black',font=('Verdana', 17))
             
             canvas.grid(row=int(start_is_trans)+i*2, column = 0)
-            #else:
-            #    canvas.place(x=20, y=i*215)
             count += 2
             if i != (len(trans)//2)-1:
                 interval = tk.Canvas(self.scrollFrame.viewPort, width = 400, height = 45)
@@ -281,9 +300,6 @@ class Usage(tk.Frame):
 
         # when packing the scrollframe, we pack scrollFrame itself (NOT the viewPort)
         self.scrollFrame.pack(side="top", fill="both", expand=True)
-
-
-
 
 def enter():
     back = tk.Label(window,width=640, height=2000)
