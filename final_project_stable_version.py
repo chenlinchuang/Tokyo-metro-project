@@ -3,6 +3,9 @@ import time
 import datetime
 import cv2
 from PIL import Image, ImageTk
+from selenium import webdriver
+import near_station
+from functools import partial
 class Node:
 
     def __init__(self, ref, index = None):
@@ -89,7 +92,7 @@ class Graph:
                     dist[node.index][2].append(node)
                     #update the addition argument
                     if len(dist[node.index][2]) > 2:
-                        dist[node.index][1] = (len(dist[node.index][2]) - 2)*0.5
+                        dist[node.index][1] = (len(dist[node.index][2]) - 2)*0.2
             if end.index in seen: return [(weight, addition_time, nodes) for weight, addition_time, nodes in dist if nodes[-1] == end]
         return dist
 
@@ -127,6 +130,7 @@ with open('transitions.csv', 'r') as fin2:
         metro_graph.connect_node(station_dict[temp[0]][int(temp[1])-1 if temp[0] != 'Mb' else int(temp[1])-3],
                                  station_dict[temp[2]][int(temp[3])-1 if temp[2] != 'Mb' else int(temp[3])-3],
                                  int(temp[4]))
+
         
 
 
@@ -144,7 +148,7 @@ c.create_image(initial.winfo_screenwidth()/2, initial.winfo_screenheight()/2+100
 c.place(x=0, y=0)
 initial.after(5000, lambda: initial.destroy()) # Destroy the widget after 30 seconds
 initial.mainloop()
-'''
+
 root = tk.Tk()
 root.configure(background='white')
 # Create a frame
@@ -170,7 +174,7 @@ video_stream()
 root.attributes("-fullscreen", True)
 root.after(6000, lambda: root.destroy())
 root.mainloop()
-
+'''
 window = tk.Tk()
 window.tk.call('wm','iconphoto', window._w, tk.PhotoImage(file='icon.png'))
 window.title('Tokyo_metro_app')
@@ -185,11 +189,14 @@ svar.set('G01')
 start_entry = tk.Entry(window, textvariable=svar)
 start_entry.place(x=80,y=0)
 
+#tk.Label(window, text='please enter start station', font=('Arial', 12), fg='gray53').place(x=80, y=0)
+
 evar = tk.StringVar()
 evar.set('Mb05')
 end_entry = tk.Entry(window, textvariable=evar)
 end_entry.place(x=80,y=35)
 
+#tk.Label(window, text='please enter end station', font=('Arial', 12), fg='gray53').place(x=80, y=35)
 #output=tk.StringVar()
 #tk.Label(window, textvariable=output,font=('Arial', 12)).place(x=20,y=400)
 
@@ -200,6 +207,7 @@ end_time = tk.StringVar()
 tk.Label(window, textvariable=end_time, font=('Arial', 12)).place(x=250, y=80)
 
 walk = Image.open('walking.png')
+
 walk = walk.resize((40,40), Image.ANTIALIAS)
 walk = ImageTk.PhotoImage(walk)
 
@@ -218,7 +226,7 @@ class ScrollFrame(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent) # create a frame (self)
         #place canvas on self
-        self.canvas = tk.Canvas(self, borderwidth=0)
+        self.canvas = tk.Canvas(self, borderwidth=0, height=500)
         #place a frame on the canvas, this frame will hold the child widgets 
         self.viewPort = tk.Frame(self.canvas)
         #place a scrollbar on self
@@ -355,7 +363,7 @@ def enter():
         for i in range(1, len(trans)):
             temp = metro_graph.dijkstra(trans[i-1], trans[i])
             trans_time.append(temp[0][0] + temp[0][1])
-
+    print(trans_time)
     if len(trans) == 2:
         transf='No Transfer'
     elif len(trans) == 3:
@@ -386,8 +394,10 @@ def enter():
     e_label = tk.Label(window, text='To', fg='white', bg='medium violet red', height=1, width=6)
     e_label.place(x=30,y=160)
     
-    Usage(window, trans, trans_time).place(x=20, y=200)
 
+    window2 = tk.Toplevel(window)
+    window2.geometry('640x640')
+    Usage(window2, trans, trans_time).place(x=20, y=0)
     '''
     count = 0
     start_is_trans = False
@@ -445,6 +455,74 @@ def clear():
     e_info = end_entry.get()
     svar.set('')
     evar.set('')
+
+def network_map():
+    img_window = tk.Toplevel(window)
+    event2canvas = lambda e, c: (c.canvasx(e.x), c.canvasy(e.y))
+
+    #setting up a tkinter canvas with scrollbars
+    frame = tk.Frame(img_window, bd=2, relief=tk.SUNKEN)
+    frame.grid_rowconfigure(0, weight=1)
+    frame.grid_columnconfigure(0, weight=1)
+    xscroll = tk.Scrollbar(frame, orient=tk.HORIZONTAL)
+    xscroll.grid(row=1, column=0, sticky=tk.E+tk.W)
+    yscroll = tk.Scrollbar(frame)
+    yscroll.grid(row=0, column=1, sticky=tk.N+tk.S)
+    canvas = tk.Canvas(frame, bd=0, xscrollcommand=xscroll.set, yscrollcommand=yscroll.set, bg='white')
+    canvas.grid(row=0, column=0, sticky=tk.N+tk.S+tk.E+tk.W)
+    xscroll.config(command=canvas.xview)
+    yscroll.config(command=canvas.yview)
+    frame.pack(fill=tk.BOTH,expand=1)
+
+    #adding the image
+    img = tk.PhotoImage(file='all.png')
+    img_window.map = img
+    canvas.create_text(10,10,text='try', anchor='w')
+    def click_img(event):
+        print('yes')
+    #F = canvas.create_rectangle(179, 80, 190,90, fill='black', tag='F09')
+    #canvas.tag_bind("F09","<ButtonPress-1>", click_img)
+    canvas.create_image(10,10,image=img,anchor="nw")
+    canvas.config(scrollregion=canvas.bbox(tk.ALL))
+
+    #function to be called when mouse is clicked
+     
+    
+    def set_start(ref, event):
+        svar.set(ref)
+    
+    def set_end(ref, event):
+        evar.set(ref)
+    
+    def open_browser(link, event):
+        driverpath='geckodriver.exe'
+        browser = webdriver.Firefox(executable_path = driverpath)
+        browser.set_window_position(0,0) 
+        browser.get(link)
+    
+    def show_information(event):
+        #outputting x and y coords to console
+        cx, cy = event2canvas(event, canvas)
+        if 158<= cx <= 183 and 50 <= cy <=90:
+            inframe = tk.Frame(img_window)
+            I27 = tk.Canvas(inframe, bg='white', width=220, height=100, highlightthickness=2, highlightbackground="blue")
+            canvas.create_window(190,95,anchor='nw', window=inframe, tag='I27')
+            I27.create_text(10,10,text='I27', anchor='nw', font=('Tahoma',17), fill='black')
+            I27.create_text(10,70,text='Start Here', anchor='sw', tag='I27_start', font=('Arial',12), fill='deep sky blue')
+            I27.create_text(10,75,text='End Here', anchor='nw', tag='I27_end',font=('Arial',12), fill='deep sky blue')
+            I27.create_text(170,75,text='more', anchor='nw', tag='I27_info',font=('Tahoma',12), fill='red')
+            I27.pack()
+            I27.tag_bind('I27_start', '<Button-1>', partial(set_start, 'I27'))
+            I27.tag_bind('I27_end', '<Button-1>', partial(set_end, 'I27'))
+            I27.tag_bind('I27_info', '<Button-1>', partial(open_browser, 'https://www.kotsu.metro.tokyo.jp/ch_h/services/subway/stations/nishi-takashimadaira.html'))
+        else:
+            canvas.delete('I27')
+        print ("(%d, %d) / (%d, %d)" % (event.x,event.y,cx,cy))
+    #mouseclick event
+    canvas.bind("<ButtonPress-1>",show_information)
+
+
+
 insert_button = tk.Button(window, text='search', bg='deep sky blue', font=('Arial',13),
                           fg='white', command=enter, width=9)
 insert_button.place(x=110, y=60)
@@ -455,6 +533,8 @@ clear_button.place(x=10,y=60)
 
 switch_button = tk.Button(window,image=img, width=40, height=40, command=switch, anchor='nw')
 switch_button.place(x=250, y=5)
+
+map_img=tk.Button(window, text='network map', font=('Arial', 13), command=network_map).place(x=300, y=5)
 
 
 
