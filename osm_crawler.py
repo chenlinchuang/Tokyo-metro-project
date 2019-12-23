@@ -39,11 +39,9 @@ browser.get(url_overpass)
 # Css selector process to avoid textarea hidden caused by xpath
 # Textarea is an attribute whose main function belongs to class div, name "CodeMirror"
 search_elem = browser.find_element_by_css_selector("div.CodeMirror textarea")
-
 # Delete preset code in textarea
 search_elem.send_keys(Keys.CONTROL + "a")
 search_elem.send_keys(Keys.DELETE)
-
 # XQuery language
 # Overpass QL
 search_elem.send_keys('[out:xml][timeout:25];' +           # output format:xml                               
@@ -54,21 +52,19 @@ out meta; \
 >; \
 out meta qt; \
 ')
-
 # Run overpass API
 search_elem.send_keys(Keys.CONTROL,Keys.ENTER)
 time.sleep(5)
 # Show data image
-time.sleep(3)
-#browser.find_element_by_class_name('ui-icon-search').click()
-#browser.find_element_by_xpath("/html/body/div[@id='navs']/div[@class='nav']/div[@class='tabs']/a[@class='t button Data']").click()
-#search_elem = browser.find_element_by_css_selector("div.CodeMirror textarea")
+browser.find_element_by_class_name('ui-icon-search').click()
+browser.find_element_by_xpath("/html/body/div[@id='navs']/div[@class='nav']/div[@class='tabs']/a[@class='t button Data']").click()
+search_elem = browser.find_element_by_css_selector("div.CodeMirror textarea")
 # Use xpath to completely clarify the export button due to multiple elements in nested class
-#browser.find_element_by_xpath("/html/body/div[@id='navs']/div[@class='nav']/div[@class='buttons']/div[@class='group'][1]/a[@class='t button'][3]").click()
-#time.sleep(3)
+browser.find_element_by_xpath("/html/body/div[@id='navs']/div[@class='nav']/div[@class='buttons']/div[@class='group'][1]/a[@class='t button'][3]").click()
+time.sleep(3)
 # Geojson format is on the top of 'export' class ---> clarify by single element is executable
-#browser.find_element_by_class_name('export').click()
-#time.sleep(5)
+browser.find_element_by_class_name('export').click()
+time.sleep(5)
 #browser.quit()
 
 #export.geojson in the desktop
