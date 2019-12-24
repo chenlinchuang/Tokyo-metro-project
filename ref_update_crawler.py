@@ -36,7 +36,7 @@ def get_ref(name):
     search_elem[0].send_keys('[out:xml][timeout:25];' +           # output format:xml                               
     '(' + 'node["name"="'+
      name +
-     '"]["station" = "subway"]\n' +
+     '"]["railway" = "station"]\n' +
     '(35.4,139.5,36.0,140.0);\n' +
     '); \
     out; \
@@ -61,4 +61,4 @@ def ref_update(name,ref):
             print(elem.attrib['id'])
             ref_element = etree.Element('tag', {'k':'ref','v':ref})
             elem.append(ref_element)
-    tree.write('export.osm',encoding="utf-8",pretty_print=True)
+    #tree.write('export.osm',encoding="utf-8",pretty_print=True)

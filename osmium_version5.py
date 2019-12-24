@@ -43,7 +43,7 @@ class NodeHandler(o.SimpleHandler):
         #if w.tags.get('ref') == None and w.tags.get('name') != None:
             #print(w.tags.get('name'))
         #if w.tags.get('ref') != None:
-        all_node_list.append(Node(w.id, w.tags.get('name'), w.location, w.tags.get('ref'), False, w.tags.get('railway')))
+        all_node_list.append(Node(w.id, w.tags.get('name'), w.location, w.tags.get('ref'), False, w.tags.get('public_transport')))
 
 
 
@@ -61,9 +61,9 @@ R = RelationHandler()
 G = WayHandler()
 H = NodeHandler()
 
-R.apply_file('export.osm')
-G.apply_file('export.osm')
-H.apply_file('export.osm')
+R.apply_file('export_new.osm')
+G.apply_file('export_new.osm')
+H.apply_file('export_new.osm')
 
 #print(all_node_list)
 #print(WayHandler.all_way_dict)
@@ -121,7 +121,61 @@ def ReturnWay(Node1,Node2):
     input : Two nodes station that are next to each other
     output : a list of nodes that connect two stations
     '''
+
     count = 0
+    for relation_ref in RelationHandler.relation_node_dict.keys():
+        if Node1 in RelationHandler.relation_node_dict[relation_ref] and Node2 in RelationHandler.relation_node_dict[relation_ref]:
+            way_in_relation = RelationHandler.relation_way_dict[relation_ref][:]
+
+    way_in_relation = list(map(lambda x : WayHandler.all_way_dict[x], way_in_relation))
+
+    for way in way_in_relation:
+        if Node1 in way:
+            node1_way = way[:]
+            way_index = way_in_relation.index(way)
+
+    skip_index_list = [way_index]
+    while 0 <= count < len(way_in_relation[:]):
+        if count in skip_index_list:
+            count += 1
+            continue
+        if Node2 in node1_way:
+            break
+        if node1_way[0] == way_in_relation[count][0]:
+            node1_way.pop(0)
+            node1_way = way_in_relation[count][::-1] + node1_way
+            skip_index_list.append(count)
+            count = 0
+            continue
+        if node1_way[0] == way_in_relation[count][-1]:
+            node1_way.pop(0)
+            node1_way = way_in_relation[count] + node1_way
+            skip_index_list.append(count)
+            count = 0
+            continue
+        if node1_way[-1] == way_in_relation[count][0]:
+            node1_way.pop()
+            node1_way += way_in_relation[count]
+            skip_index_list.append(count)
+            count = 0
+            continue
+        if node1_way[-1] == way_in_relation[count][-1]:
+            node1_way.pop()
+            node1_way += way_in_relation[count][::-1]
+            skip_index_list.append(count)
+            count = 0
+            continue
+        count += 1
+
+    if node1_way.index(Node1) > node1_way.index(Node2):
+        node1_way = node1_way[node1_way.index(Node2):node1_way.index(Node1)+1]
+    else:
+        node1_way = node1_way[node1_way.index(Node1):node1_way.index(Node2)+1]
+    
+    return node1_way
+
+
+    '''
     for relation_count in range(len(all_way_list)):
         for way in all_way_list[relation_count].big_list:
             for i in range(1,len(way)):
@@ -137,28 +191,22 @@ def ReturnWay(Node1,Node2):
                         if way[-1] == all_way_list[relation_count].big_list[count][0]:
                             way.pop()
                             way += all_way_list[relation_count].big_list[count]
-                            #print(way)
                             count = 0
-                        count += 1
-                    count = 0
-                    while 0 <= count < len(all_way_list[relation_count].big_list):
-                        if count == way_index:
-                            count += 1
-                            continue
                         if way[0] == all_way_list[relation_count].big_list[count][-1]:
                             way.pop(0)
                             way = all_way_list[relation_count].big_list[count] + way
-                            #print(way)
                             count = 0
+                        if Node2 in way:
+                            break
                         count += 1
-                    #print(way)
+
                     
                     if way.index(Node1) > way.index(Node2):
                         way = way[way.index(Node2):way.index(Node1)+1]
                     else:
                         way = way[way.index(Node1):way.index(Node2)+1]
                     return way
-
+'''
 def countWaydistance(way):
     '''
     input : a list of node_id
@@ -180,8 +228,17 @@ def get_node_id(node_ref):
     output : node id
     '''
     for node in all_node_list:
-        if node.ref == node_ref:
-            return node.id
+        if node.ref != None:
+            if node.ref in node_ref:
+                return node.id
+def get_node_ref(node_id):
+    '''
+    input : node reference (ex:G04, H03)
+    output : node id
+    '''
+    for node in all_node_list:
+        if node.id == node_id:
+            return node.ref
 
 def get_node_type(node_id):
     '''
@@ -246,11 +303,11 @@ for way in del_way_list:
 get_ref_node_list =[]
 # find station without reference
 for node in all_node_list:
-    if node.ref == None and node.stop == 'stop':
+    if node.ref == None and node.stop == 'stop_position':
         get_ref_node_list.append(node.name)
-
+print(len(get_ref_node_list))
 get_ref_node_list = list(set(get_ref_node_list))
-#print(get_ref_node_list)
+print(get_ref_node_list)
 
 # split station with multiple reference
 def ref_split(node):
@@ -268,10 +325,10 @@ def ref_split(node):
                         node.ref.append(ref)
         if len(node.ref) == 1 :
             node.ref = ''.join(node.ref)
-            print(node.ref)
+            #print(node.ref)
         else :
             node.ref = ';'.join(node.ref)
-            print(node.ref)
+            #print(node.ref)
 
 
 
@@ -282,21 +339,39 @@ for node in all_node_list:
 
 
 
+station_count = {'G':19, 'M':25, 'H':21, 'T':23, 'C':20, 'Y':24, 'Z':14, 'N':19, 'F':16, 'A':20, 'I':27, 'S':21}
 
+station_ref = {}
+for relation in station_count.keys():
+    temp_list = []
+    for i in range(station_count[relation]):
+        temp_list.append(relation + str(i+1).zfill(2))
+        station_ref[relation] = temp_list
 
-G_list = ['G04','G05','G06','G07','G08','G09','G10','G11','G12','G13','G14','G15','G16','G17','G18','G19']
-G_distance_list =[]
+distance = {}
 
-#print(get_node_id(G_list[1]))
-for i,j in zip(range(len(G_list)-1),range(1,len(G_list))):
-    G_distance_list.append(countWaydistance(ReturnWay(get_node_id(G_list[i]),get_node_id(G_list[j]))))
+#print(get_node_id(G_list[1]))\
+ref_miss_count = 0
+for relation in station_count.keys():
+    temp_list = []
+    for i,j in zip(range(len(station_ref[relation])-1),range(1,len(station_ref[relation]))):
+        try:
+            temp_list.append(countWaydistance(ReturnWay(get_node_id(station_ref[relation][i]),get_node_id(station_ref[relation][j]))))
+        except ValueError:
+            #print(station_ref[relation][i],station_ref[relation][j])
+            pass
+        except UnboundLocalError:
+            ref_miss_count += 1
+    distance[relation] = temp_list
+print(ref_miss_count)
+#print(ReturnWay(get_node_id('M08'),get_node_id('M09')))
 
-#print(G_distance_list)
-
+#for i in distance.keys():
+#    print(len(distance[i]))
 
 
 # Test
-#print(countWaydistance(ReturnWay(get_node_id('F13'),get_node_id('F14'))))
+#print(countWaydistance(ReturnWay(get_node_id('F10'),get_node_id('F11'))))
 
 
 

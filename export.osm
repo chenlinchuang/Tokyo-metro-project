@@ -1140,7 +1140,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="I01;N01;MG01"/></node>
+  <tag k="ref" v="I01;N01;MG01"/><tag k="ref" v="I01;N01;MG01"/></node>
   <node changeset="66443371" id="6219771724" lat="35.6333165" lon="139.7155862" timestamp="2019-01-19T00:55:29Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66443371" id="6219771725" lat="35.6329248" lon="139.7156905" timestamp="2019-01-19T00:55:29Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66443371" id="6219771726" lat="35.6329124" lon="139.7157020" timestamp="2019-01-19T00:55:29Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -1303,7 +1303,7 @@
     <tag k="subway" v="yes"/>
     <tag k="wikidata" v="Q428811"/>
     <tag k="wikipedia" v="ja:渋谷駅"/>
-  </node>
+  <tag k="ref" v="G01"/></node>
   <node changeset="14422310" id="270339497" lat="35.6588310" lon="139.7019240" timestamp="2012-12-27T08:26:05Z" uid="378532" user="nyampire" version="3"/>
   <node changeset="67265113" id="1825132989" lat="35.6589503" lon="139.7024170" timestamp="2019-02-16T22:35:24Z" uid="1687166" user="U20" version="2"/>
   <node changeset="67265113" id="1825132993" lat="35.6591023" lon="139.7028685" timestamp="2019-02-16T22:35:24Z" uid="1687166" user="U20" version="2"/>
@@ -1317,7 +1317,7 @@
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
     <tag k="ref" v="F16"/>
-  </node>
+  <tag k="ref" v="G01"/></node>
   <node changeset="13406786" id="1951952379" lat="35.6605821" lon="139.7023246" timestamp="2012-10-08T02:05:54Z" uid="900076" user="tsuhi" version="1"/>
   <node changeset="13406786" id="1951952393" lat="35.6592379" lon="139.7025590" timestamp="2012-10-08T02:05:54Z" uid="900076" user="tsuhi" version="1"/>
   <node changeset="14422310" id="2084165874" lat="35.6588014" lon="139.7017989" timestamp="2012-12-27T08:25:58Z" uid="378532" user="nyampire" version="1"/>
@@ -1344,7 +1344,7 @@
     <tag k="ref" v="G01"/>
     <tag k="source" v="Knowledge"/>
     <tag k="subway" v="yes"/>
-  </node>
+  <tag k="ref" v="G01"/></node>
   <node changeset="66436136" id="6219196070" lat="35.6587177" lon="139.7011981" timestamp="2019-01-18T18:17:18Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66438723" id="6219196074" lat="35.6586553" lon="139.7010134" timestamp="2019-01-18T20:15:30Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66436136" id="6219196075" lat="35.6587188" lon="139.7015756" timestamp="2019-01-18T18:17:18Z" uid="309382" user="Diego Sanguinetti" version="1">
@@ -1639,7 +1639,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="I03;N03"/></node>
+  <tag k="ref" v="I03;N03"/><tag k="ref" v="I03;N03"/></node>
   <node changeset="65740838" id="4111329881" lat="35.6429669" lon="139.7340053" timestamp="2018-12-24T13:37:11Z" uid="309382" user="Diego Sanguinetti" version="4">
     <tag k="name" v="白金高輪"/>
     <tag k="name:en" v="Shirokane-takanawa"/>
@@ -1648,7 +1648,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="I03;N03"/></node>
+  <tag k="ref" v="I03;N03"/><tag k="ref" v="I03;N03"/></node>
   <node changeset="66455719" id="6221268280" lat="35.6425786" lon="139.7338336" timestamp="2019-01-19T15:04:08Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66456586" id="6221268281" lat="35.6438560" lon="139.7345799" timestamp="2019-01-19T15:42:58Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66456586" id="6221268282" lat="35.6438660" lon="139.7346140" timestamp="2019-01-19T15:42:58Z" uid="309382" user="Diego Sanguinetti" version="2"/>
@@ -2840,7 +2840,7 @@
     <tag k="operator" v="東京都交通局"/>
     <tag k="public_transport" v="station"/>
     <tag k="railway" v="station"/>
-    <tag k="ref" v="E27"/>
+    <tag k="ref" v="E37"/>
     <tag k="station" v="subway"/>
     <tag k="wheelchair" v="yes"/>
     <tag k="wikidata" v="Q275521"/>
@@ -2971,7 +2971,7 @@
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
     <tag k="transport" v="subway"/>
-  <tag k="ref" v="Y01;F01"/></node>
+  <tag k="ref" v="Y01;F01"/><tag k="ref" v="Y01;F01"/></node>
   <node changeset="71222091" id="6545201655" lat="35.7887774" lon="139.6120233" timestamp="2019-06-13T15:03:20Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="71222091" id="6545201656" lat="35.7887469" lon="139.6120046" timestamp="2019-06-13T15:03:20Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="71222091" id="6545201657" lat="35.7879723" lon="139.6138553" timestamp="2019-06-13T15:03:20Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -3083,7 +3083,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="I26"/></node>
+  <tag k="ref" v="I26"/><tag k="ref" v="I26"/></node>
   <node changeset="56314435" id="1889522858" lat="35.7885580" lon="139.6623962" timestamp="2018-02-13T06:39:55Z" uid="7496544" user="cantor34" version="3"/>
   <node changeset="56314435" id="1889522865" lat="35.7889591" lon="139.6603719" timestamp="2018-02-13T06:39:56Z" uid="7496544" user="cantor34" version="3"/>
   <node changeset="69730372" id="1950503436" lat="35.7884423" lon="139.6633313" timestamp="2019-04-30T11:42:25Z" uid="8657210" user="MY5DVrAr0e599Japan" version="3">
@@ -3368,7 +3368,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="C03"/></node>
+  <tag k="ref" v="C03"/><tag k="ref" v="C03"/></node>
   <node changeset="66279039" id="6205782888" lat="35.6685523" lon="139.7054351" timestamp="2019-01-13T16:53:51Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66280680" id="6205782892" lat="35.6684336" lon="139.7053478" timestamp="2019-01-13T18:06:13Z" uid="309382" user="Diego Sanguinetti" version="3"/>
   <node changeset="66278902" id="6205784381" lat="35.6691085" lon="139.7058438" timestamp="2019-01-13T16:48:39Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -3388,7 +3388,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="C03"/></node>
+  <tag k="ref" v="C03"/><tag k="ref" v="C03"/></node>
   <node changeset="66280680" id="6205951384" lat="35.6692881" lon="139.7037102" timestamp="2019-01-13T18:06:11Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66284567" id="6206398987" lat="35.6688955" lon="139.7045524" timestamp="2019-01-13T21:11:39Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66284567" id="6206398993" lat="35.6688437" lon="139.7046636" timestamp="2019-01-13T21:11:39Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -3572,7 +3572,7 @@
     <tag k="station" v="subway"/>
     <tag k="subway" v="yes"/>
     <tag k="wheelchair" v="yes"/>
-  <tag k="ref" v="S01"/></node>
+  <tag k="ref" v="S01"/><tag k="ref" v="S01"/></node>
   <node changeset="15627309" id="2251504617" lat="35.6889611" lon="139.7012558" timestamp="2013-04-06T02:52:43Z" uid="1325073" user="hk40m" version="1"/>
   <node changeset="15627309" id="2251504618" lat="35.6888238" lon="139.7002334" timestamp="2013-04-06T02:52:43Z" uid="1325073" user="hk40m" version="1"/>
   <node changeset="17012939" id="2389668053" lat="35.6918333" lon="139.7026646" timestamp="2013-07-19T14:55:29Z" uid="900076" user="tsuhi" version="1"/>
@@ -3645,7 +3645,7 @@
     <tag k="wheelchair" v="yes"/>
     <tag k="wikidata" v="Q801447"/>
     <tag k="wikipedia" v="ja:新宿駅"/>
-  <tag k="ref" v="S01"/></node>
+  <tag k="ref" v="S01"/><tag k="ref" v="S01"/></node>
   <node changeset="67257814" id="6282970732" lat="35.6878020" lon="139.6993319" timestamp="2019-02-16T16:56:52Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="67256091" id="6282970733" lat="35.6888661" lon="139.6989415" timestamp="2019-02-16T15:28:45Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="67257814" id="6282970734" lat="35.6882153" lon="139.6991810" timestamp="2019-02-16T16:56:52Z" uid="309382" user="Diego Sanguinetti" version="2">
@@ -3665,7 +3665,7 @@
     <tag k="wheelchair" v="yes"/>
     <tag k="wikidata" v="Q801447"/>
     <tag k="wikipedia" v="ja:新宿駅"/>
-  <tag k="ref" v="S01"/></node>
+    <tag k="ref" v="E27"/><tag k="ref" v="S01"/></node>
   <node changeset="67257814" id="6282970735" lat="35.6877527" lon="139.6993065" timestamp="2019-02-16T16:56:52Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="67256091" id="6282970739" lat="35.6889007" lon="139.6988900" timestamp="2019-02-16T15:28:46Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="67258672" id="6283083554" lat="35.6878316" lon="139.6992985" timestamp="2019-02-16T17:35:29Z" uid="309382" user="Diego Sanguinetti" version="2"/>
@@ -4058,7 +4058,7 @@
     <tag k="wheelchair" v="yes"/>
     <tag k="wikidata" v="Q112503"/>
     <tag k="wikipedia" v="ja:東新宿駅"/>
-  <tag k="ref" v="F12"/></node>
+  <tag k="ref" v="F12"/><tag k="ref" v="F12"/></node>
   <node changeset="69059856" id="6394721510" lat="35.6979700" lon="139.7075589" timestamp="2019-04-09T19:40:23Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="69059856" id="6394721511" lat="35.6979616" lon="139.7076281" timestamp="2019-04-09T19:40:23Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="71261733" id="6548175852" lat="35.6978435" lon="139.7081662" timestamp="2019-06-14T17:33:11Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -4078,7 +4078,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="F12"/></node>
+  <tag k="ref" v="F12"/><tag k="ref" v="F12"/></node>
   <node changeset="71261733" id="6548175859" lat="35.6978347" lon="139.7080916" timestamp="2019-06-14T17:33:11Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="71261779" id="6548180742" lat="35.6979821" lon="139.7072193" timestamp="2019-06-14T17:35:10Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="71261779" id="6548180743" lat="35.6979583" lon="139.7072151" timestamp="2019-06-14T17:35:10Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -4608,7 +4608,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="Y16;Z04;N07"/></node>
+  <tag k="ref" v="Y16;Z04;N07"/><tag k="ref" v="Y16;Z04;N07"/></node>
   <node changeset="67291683" id="6179529805" lat="35.6785341" lon="139.7395401" timestamp="2019-02-17T20:29:06Z" uid="9126171" user="azakh-world" version="4">
     <tag k="name" v="永田町"/>
     <tag k="name:en" v="Nagatacho"/>
@@ -4617,7 +4617,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="Y16;Z04;N07"/></node>
+  <tag k="ref" v="Y16;Z04;N07"/><tag k="ref" v="Y16;Z04;N07"/></node>
   <node changeset="66335461" id="6210447374" lat="35.6763007" lon="139.7374458" timestamp="2019-01-15T15:42:51Z" uid="309382" user="Diego Sanguinetti" version="4">
     <tag k="colour" v="orange"/>
     <tag k="name" v="赤坂見附"/>
@@ -4688,7 +4688,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="Y16;Z04;N07"/></node>
+  <tag k="ref" v="Y16;Z04;N07"/><tag k="ref" v="Y16;Z04;N07"/></node>
   <node changeset="66520250" id="6226032064" lat="35.6779097" lon="139.7400690" timestamp="2019-01-21T22:35:55Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66520250" id="6226032065" lat="35.6779192" lon="139.7399921" timestamp="2019-01-21T22:35:55Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66520250" id="6226032068" lat="35.6787611" lon="139.7382589" timestamp="2019-01-21T22:35:55Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -5062,7 +5062,7 @@
     <tag k="transport" v="subway"/>
     <tag k="wikidata" v="Q741614"/>
     <tag k="wikipedia" v="ja:霞ケ関駅 (東京都)"/>
-  <tag k="ref" v="H06"/></node>
+  <tag k="ref" v="H06"/><tag k="ref" v="C08"/></node>
   <node changeset="67298668" id="1926709957" lat="35.6691961" lon="139.7553036" timestamp="2019-02-18T02:58:24Z" uid="7245212" user="LuxuryCoop" version="14">
     <tag k="alt_name" v="西新橋"/>
     <tag k="colour" v="blue"/>
@@ -5100,7 +5100,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="H06"/></node>
+  <tag k="ref" v="H06"/><tag k="ref" v="C08"/></node>
   <node changeset="69879002" id="6195205635" lat="35.6729599" lon="139.7507636" timestamp="2019-05-04T15:13:59Z" uid="309382" user="Diego Sanguinetti" version="2">
     <tag k="noexit" v="yes"/>
   </node>
@@ -5130,7 +5130,7 @@
     <tag k="subway" v="yes"/>
     <tag k="wikidata" v="Q741614"/>
     <tag k="wikipedia" v="ja:霞ケ関駅 (東京都)"/>
-  <tag k="ref" v="H06"/></node>
+  <tag k="ref" v="H06"/><tag k="ref" v="C08"/></node>
   <node changeset="66195475" id="6198306279" lat="35.6738137" lon="139.7537266" timestamp="2019-01-10T13:19:07Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66195475" id="6198306280" lat="35.6737844" lon="139.7537543" timestamp="2019-01-10T13:19:07Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66239057" id="6202154647" lat="35.6725083" lon="139.7518406" timestamp="2019-01-11T21:04:17Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -5170,7 +5170,7 @@
     <tag k="railway" v="stop"/>
     <tag k="ref" v="H07"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="C09"/></node>
+  <tag k="ref" v="C09"/><tag k="ref" v="C09"/></node>
   <node changeset="66239358" id="6192717738" lat="35.6741089" lon="139.7608768" timestamp="2019-01-11T21:16:22Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66140177" id="6193137763" lat="35.6735111" lon="139.7580046" timestamp="2019-01-08T20:21:33Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66140177" id="6193137778" lat="35.6735048" lon="139.7580084" timestamp="2019-01-08T20:21:33Z" uid="309382" user="Diego Sanguinetti" version="2"/>
@@ -5197,7 +5197,7 @@
     <tag k="wheelchair" v="limited"/>
     <tag k="wikidata" v="Q511753"/>
     <tag k="wikipedia" v="ja:日比谷駅"/>
-  <tag k="ref" v="C09"/></node>
+    <tag k="ref" v="C09"/><tag k="ref" v="C09"/></node>
   <node changeset="66140177" id="6193465469" lat="35.6729853" lon="139.7575420" timestamp="2019-01-08T20:21:30Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66141654" id="6193587643" lat="35.6744902" lon="139.7589916" timestamp="2019-01-08T21:24:57Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="21437821" id="1844517111" lat="35.6763655" lon="139.7526183" timestamp="2014-04-01T11:52:29Z" uid="638409" user="zakkyy3" version="4"/>
@@ -5291,7 +5291,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="C09"/></node>
+  <tag k="ref" v="C09"/><tag k="ref" v="C09"/></node>
   <node changeset="66141654" id="6193137764" lat="35.6746416" lon="139.7591443" timestamp="2019-01-08T21:25:00Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66141654" id="6193137765" lat="35.6746430" lon="139.7591613" timestamp="2019-01-08T21:25:00Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66140177" id="6193465454" lat="35.6747868" lon="139.7593124" timestamp="2019-01-08T20:21:28Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -5561,7 +5561,7 @@
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
     <tag k="transport" v="subway"/>
-  <tag k="ref" v="Y18"/></node>
+  <tag k="ref" v="Y18"/><tag k="ref" v="Y18"/></node>
   <node changeset="13400811" id="1951081040" lat="35.6784219" lon="139.7653669" timestamp="2012-10-07T16:45:06Z" uid="900076" user="tsuhi" version="1"/>
   <node changeset="16379490" id="1951081043" lat="35.6754448" lon="139.7656925" timestamp="2013-06-01T15:58:58Z" uid="900076" user="tsuhi" version="2"/>
   <node changeset="16379490" id="1951081045" lat="35.6755681" lon="139.7656821" timestamp="2013-06-01T15:58:58Z" uid="900076" user="tsuhi" version="2"/>
@@ -5880,7 +5880,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="Z09"/></node>
+  <tag k="ref" v="Z09"/><tag k="ref" v="Z09"/></node>
   <node changeset="66713962" id="6242252707" lat="35.6846571" lon="139.7746549" timestamp="2019-01-28T18:01:08Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66713962" id="6242252708" lat="35.6846417" lon="139.7747503" timestamp="2019-01-28T18:01:08Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66713962" id="6242252709" lat="35.6846405" lon="139.7748370" timestamp="2019-01-28T18:01:08Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -6070,7 +6070,7 @@
     <tag k="railway" v="stop"/>
     <tag k="ref" v="N10"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="Y13"/></node>
+  <tag k="ref" v="Y13"/><tag k="ref" v="Y13"/></node>
   <node changeset="67061349" id="6268844068" lat="35.7025750" lon="139.7443428" timestamp="2019-02-09T23:20:14Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="67061349" id="6268844069" lat="35.7024757" lon="139.7443394" timestamp="2019-02-09T23:20:14Z" uid="309382" user="Diego Sanguinetti" version="3"/>
   <node changeset="67061349" id="6268844072" lat="35.7015818" lon="139.7436489" timestamp="2019-02-09T23:20:14Z" uid="309382" user="Diego Sanguinetti" version="3">
@@ -6089,7 +6089,7 @@
     <tag k="subway" v="yes"/>
     <tag k="wikidata" v="Q800953"/>
     <tag k="wikipedia" v="ja:飯田橋駅"/>
-  <tag k="ref" v="Y13"/></node>
+  <tag k="ref" v="Y13"/><tag k="ref" v="Y13"/></node>
   <node changeset="67083705" id="6268871797" lat="35.7023146" lon="139.7441504" timestamp="2019-02-10T22:45:11Z" uid="309382" user="Diego Sanguinetti" version="3"/>
   <node changeset="67083705" id="6268884568" lat="35.7022760" lon="139.7441602" timestamp="2019-02-10T22:45:11Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="67061349" id="6268884572" lat="35.7024413" lon="139.7444197" timestamp="2019-02-09T23:20:12Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -6127,7 +6127,7 @@
     <tag k="subway" v="yes"/>
     <tag k="wikidata" v="Q800953"/>
     <tag k="wikipedia" v="ja:飯田橋駅"/>
-  <tag k="ref" v="Y13"/></node>
+  <tag k="ref" v="Y13"/><tag k="ref" v="Y13"/></node>
   <node changeset="67084481" id="6270528142" lat="35.7031991" lon="139.7461782" timestamp="2019-02-10T23:52:07Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="67084481" id="6270528143" lat="35.7033083" lon="139.7464791" timestamp="2019-02-10T23:52:07Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="67084481" id="6270528144" lat="35.7034969" lon="139.7468812" timestamp="2019-02-10T23:52:07Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -6921,7 +6921,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="N12"/></node>
+  <tag k="ref" v="N12"/><tag k="ref" v="N12"/></node>
   <node changeset="13408739" id="1952201018" lat="35.7125507" lon="139.7685752" timestamp="2012-10-08T07:47:08Z" uid="900076" user="tsuhi" version="1"/>
   <node changeset="17013868" id="2389826368" lat="35.7073442" lon="139.7658281" timestamp="2013-07-19T16:22:38Z" uid="900076" user="tsuhi" version="1"/>
   <node changeset="17013868" id="2389826371" lat="35.7073519" lon="139.7655663" timestamp="2013-07-19T16:22:38Z" uid="900076" user="tsuhi" version="1"/>
@@ -6984,7 +6984,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="C13"/></node>
+  <tag k="ref" v="C13"/><tag k="ref" v="C13"/></node>
   <node changeset="68044022" id="6190974824" lat="35.7080418" lon="139.7698804" timestamp="2019-03-12T01:23:20Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="68044022" id="6190974825" lat="35.7080908" lon="139.7699372" timestamp="2019-03-12T01:23:20Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66110706" id="6190974826" lat="35.7074413" lon="139.7699319" timestamp="2019-01-07T21:57:54Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -7006,7 +7006,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="E09"/></node>
+  <tag k="ref" v="E09"/><tag k="ref" v="E09"/></node>
   <node changeset="66212039" id="6199802304" lat="35.7078800" lon="139.7740793" timestamp="2019-01-10T23:59:47Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66212039" id="6199802305" lat="35.7078921" lon="139.7741085" timestamp="2019-01-10T23:59:47Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66260162" id="6204170636" lat="35.7079408" lon="139.7736153" timestamp="2019-01-12T20:49:57Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -7669,7 +7669,7 @@
     <tag k="subway" v="yes"/>
     <tag k="wikidata" v="Q151419"/>
     <tag k="wikipedia" v="ja:本駒込駅"/>
-  <tag k="ref" v="No reference"/></node>
+  <tag k="ref" v="No reference"/><tag k="ref" v="No reference"/></node>
   <node changeset="69878771" id="6447980254" lat="35.7224315" lon="139.7525222" timestamp="2019-05-04T15:06:59Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="16394295" id="2329712974" lat="35.7204507" lon="139.7561162" timestamp="2013-06-02T18:13:28Z" uid="900076" user="tsuhi" version="1"/>
   <node changeset="16394295" id="2329712982" lat="35.7273214" lon="139.7526544" timestamp="2013-06-02T18:13:28Z" uid="900076" user="tsuhi" version="1"/>
@@ -7730,7 +7730,7 @@
     <tag k="name:ru" v="Ниси-Ниппори"/>
     <tag k="public_transport" v="stop_position"/>
     <tag k="subway" v="yes"/>
-  </node>
+  <tag k="ref" v="C16"/></node>
   <node changeset="68592200" id="6365256091" lat="35.7322969" lon="139.7668282" timestamp="2019-03-27T16:08:23Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="69915243" id="6450691557" lat="35.7321490" lon="139.7665378" timestamp="2019-05-05T20:14:28Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="69915243" id="6450691558" lat="35.7324962" lon="139.7672550" timestamp="2019-05-05T20:14:28Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -7786,7 +7786,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="N17"/></node>
+  <tag k="ref" v="N17"/><tag k="ref" v="N17"/></node>
   <node changeset="16394295" id="2329713063" lat="35.7664483" lon="139.7353458" timestamp="2013-06-02T18:13:29Z" uid="900076" user="tsuhi" version="1"/>
   <node changeset="16394295" id="2329713064" lat="35.7725671" lon="139.7331785" timestamp="2013-06-02T18:13:29Z" uid="900076" user="tsuhi" version="1"/>
   <node changeset="16394295" id="2329713057" lat="35.7610771" lon="139.7374836" timestamp="2013-06-02T18:13:29Z" uid="900076" user="tsuhi" version="1"/>
@@ -8147,7 +8147,7 @@
     <tag k="operator" v="東京都交通局;東京地下鉄"/>
     <tag k="public_transport" v="stop_position"/>
     <tag k="subway" v="yes"/>
-  </node>
+  <tag k="ref" v="E14;Z11"/></node>
   <node changeset="66721618" id="6243002387" lat="35.6820005" lon="139.7987577" timestamp="2019-01-28T23:43:04Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66721618" id="6243002388" lat="35.6831432" lon="139.7986008" timestamp="2019-01-28T23:43:04Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66721494" id="6243002392" lat="35.6832702" lon="139.7985762" timestamp="2019-01-28T23:31:38Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -8162,7 +8162,7 @@
     <tag k="operator" v="東京都交通局;東京地下鉄"/>
     <tag k="public_transport" v="stop_position"/>
     <tag k="subway" v="yes"/>
-  </node>
+  <tag k="ref" v="E14;Z11"/></node>
   <node changeset="66721494" id="6243002394" lat="35.6819518" lon="139.7987438" timestamp="2019-01-28T23:31:38Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66721494" id="6243002395" lat="35.6819170" lon="139.7988038" timestamp="2019-01-28T23:31:38Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66721618" id="6243028641" lat="35.6819808" lon="139.7987738" timestamp="2019-01-28T23:43:01Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -8205,7 +8205,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="E13"/></node>
+    <tag k="ref" v="S11"/><tag k="ref" v="E13"/></node>
   <node changeset="65924537" id="2389061878" lat="35.6880556" lon="139.7982500" timestamp="2019-01-01T01:08:45Z" uid="309382" user="Diego Sanguinetti" version="9">
     <tag k="name" v="森下"/>
     <tag k="name:en" v="Morishita"/>
@@ -8216,7 +8216,7 @@
     <tag k="name:ru" v="Морисита"/>
     <tag k="public_transport" v="stop_position"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="E13"/></node>
+    <tag k="ref" v="E13"/><tag k="ref" v="E13"/></node>
   <node changeset="7090854" id="306333108" lat="35.6881597" lon="139.8016534" timestamp="2011-01-26T07:37:29Z" uid="400266" user="shingo" version="8"/>
   <node changeset="11129564" id="306333228" lat="35.6883106" lon="139.8041147" timestamp="2012-03-28T18:09:01Z" uid="618878" user="nakanao" version="7"/>
   <node changeset="66315762" id="1180276047" lat="35.6884236" lon="139.8061202" timestamp="2019-01-14T21:59:41Z" uid="309382" user="Diego Sanguinetti" version="8">
@@ -8263,7 +8263,8 @@
     <tag k="name:ru" v="Сумиёси"/>
     <tag k="public_transport" v="stop_position"/>
     <tag k="subway" v="yes"/>
-  </node>
+    <tag k="ref" v="Z12"/>
+  <tag k="ref" v="S13;Z12"/></node>
   <node changeset="66404876" id="5594490949" lat="35.6890131" lon="139.8160050" timestamp="2019-01-17T18:47:32Z" uid="309382" user="Diego Sanguinetti" version="2">
     <tag k="name" v="住吉"/>
     <tag k="name:en" v="Sumiyoshi"/>
@@ -8274,7 +8275,8 @@
     <tag k="name:ru" v="Сумиёси"/>
     <tag k="public_transport" v="stop_position"/>
     <tag k="subway" v="yes"/>
-  </node>
+    <tag k="ref" v="S13"/>
+  <tag k="ref" v="S13;Z12"/></node>
   <node changeset="15719438" id="252409686" lat="35.6893045" lon="139.8241372" timestamp="2013-04-14T02:10:29Z" uid="619933" user="Yu_stl" version="9"/>
   <node changeset="67298668" id="2011629184" lat="35.6893636" lon="139.8266054" timestamp="2019-02-18T02:58:36Z" uid="7245212" user="LuxuryCoop" version="7">
     <tag k="colour" v="lightgreen"/>
@@ -9183,7 +9185,7 @@
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
     <tag k="wheelchair" v="yes"/>
-  <tag k="ref" v="C18"/></node>
+  <tag k="ref" v="C18"/><tag k="ref" v="C18"/></node>
   <node changeset="66655589" id="6237957749" lat="35.7493496" lon="139.8045145" timestamp="2019-01-26T13:49:49Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66655589" id="6237957751" lat="35.7493185" lon="139.8045232" timestamp="2019-01-26T13:49:49Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66655589" id="6237957752" lat="35.7496564" lon="139.8045864" timestamp="2019-01-26T13:49:49Z" uid="309382" user="Diego Sanguinetti" version="1">
@@ -9201,7 +9203,7 @@
     <tag k="subway" v="yes"/>
     <tag k="wikidata" v="Q801026"/>
     <tag k="wikipedia" v="ja:北千住駅"/>
-  <tag k="ref" v="C18"/></node>
+  <tag k="ref" v="C18"/><tag k="ref" v="C18"/></node>
   <node changeset="66658164" id="6237967875" lat="35.7494200" lon="139.8045391" timestamp="2019-01-26T16:04:50Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66657278" id="6237967876" lat="35.7502811" lon="139.8047439" timestamp="2019-01-26T15:20:45Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66658164" id="6237967877" lat="35.7494054" lon="139.8045454" timestamp="2019-01-26T16:04:50Z" uid="309382" user="Diego Sanguinetti" version="2"/>
@@ -9280,7 +9282,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="C19"/></node>
+  <tag k="ref" v="C19"/><tag k="ref" v="C19"/></node>
   <node changeset="66466028" id="6222087403" lat="35.7622167" lon="139.8260342" timestamp="2019-01-20T00:01:57Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="69730372" id="1637457699" lat="35.7625478" lon="139.8285688" timestamp="2019-04-30T11:40:58Z" uid="8657210" user="MY5DVrAr0e599Japan" version="4">
     <tag k="railway" v="switch"/>
@@ -9481,7 +9483,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="N18"/></node>
+  <tag k="ref" v="N18"/><tag k="ref" v="N18"/></node>
   <node changeset="16394295" id="2329713075" lat="35.7819075" lon="139.7284910" timestamp="2013-06-02T18:13:30Z" uid="900076" user="tsuhi" version="1"/>
   <node changeset="19317279" id="2329713076" lat="35.7820889" lon="139.7281670" timestamp="2013-12-07T05:46:01Z" uid="69966" user="ikiya" version="2"/>
   <node changeset="16394295" id="2329713077" lat="35.7822337" lon="139.7277751" timestamp="2013-06-02T18:13:30Z" uid="900076" user="tsuhi" version="1"/>

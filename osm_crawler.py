@@ -30,7 +30,7 @@ for id2 in id_elem2:
     id_list.append(id2.text)            # Text is the string attribute of relations
 
 id_list = [id.lstrip() for id in id_list]
-
+id_list.remove('8015932')
 ### Main code
 # Access overpass api by url_browser
 url_overpass = 'https://overpass-turbo.eu/'
