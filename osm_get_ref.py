@@ -151,9 +151,9 @@ for node in all_node_list:
         get_ref_node_list.append(node.name)
 
 get_ref_node_list = list(set(get_ref_node_list))
-print(get_ref_node_list)
+#print(get_ref_node_list)
 
-print(get_ref('明治神宮前〈原宿〉'))
+#print(get_ref('明治神宮前〈原宿〉'))
 #for name in get_ref_node_list:
     #ref_update(name,get_ref(name))
 
