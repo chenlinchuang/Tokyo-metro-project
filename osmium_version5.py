@@ -570,17 +570,21 @@ def return_node_dict():
             RelationHandler.relation_node_dict[w.tags.get('ref')] = node_id_list
 
     class Node:
-        def __init__(self, id, name, location, ref, isTransferStation, stop):
+        def __init__(self, id, name, location, ref, isTransferStation, stop, index=None):
             self.id = id
             self.name = name
             self.location = location
             self.ref = ref
             self.isTransferStation = isTransferStation
             self.stop = stop
+            self.index = index
     
         def get_start_end(self,relation_ref):
             self.start = relation_ref + '01'
             self.end = relation_ref + station_count[relation_ref]
+
+        def __str__(self):
+            return self.ref
 
     all_node_list = []
     class NodeHandler(o.SimpleHandler):
@@ -667,3 +671,4 @@ if __name__ == "__main__":
     print(returndistance_dict())
     print(get_ref_from_name('新宿'))
     print(return_node_dict())
+    print(returndistance_dict.countWaydistance([get_node_id('G04'), get_node_id('G09')]))
