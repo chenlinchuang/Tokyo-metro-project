@@ -5170,7 +5170,7 @@
     <tag k="railway" v="stop"/>
     <tag k="ref" v="H07"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="C09"/><tag k="ref" v="C09"/></node>
+  </node>
   <node changeset="66239358" id="6192717738" lat="35.6741089" lon="139.7608768" timestamp="2019-01-11T21:16:22Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66140177" id="6193137763" lat="35.6735111" lon="139.7580046" timestamp="2019-01-08T20:21:33Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66140177" id="6193137778" lat="35.6735048" lon="139.7580084" timestamp="2019-01-08T20:21:33Z" uid="309382" user="Diego Sanguinetti" version="2"/>
@@ -5197,7 +5197,7 @@
     <tag k="wheelchair" v="limited"/>
     <tag k="wikidata" v="Q511753"/>
     <tag k="wikipedia" v="ja:日比谷駅"/>
-    <tag k="ref" v="C09"/><tag k="ref" v="C09"/></node>
+    </node>
   <node changeset="66140177" id="6193465469" lat="35.6729853" lon="139.7575420" timestamp="2019-01-08T20:21:30Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="66141654" id="6193587643" lat="35.6744902" lon="139.7589916" timestamp="2019-01-08T21:24:57Z" uid="309382" user="Diego Sanguinetti" version="1"/>
   <node changeset="21437821" id="1844517111" lat="35.6763655" lon="139.7526183" timestamp="2014-04-01T11:52:29Z" uid="638409" user="zakkyy3" version="4"/>
@@ -5291,7 +5291,7 @@
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
     <tag k="subway" v="yes"/>
-  <tag k="ref" v="C09"/><tag k="ref" v="C09"/></node>
+  </node>
   <node changeset="66141654" id="6193137764" lat="35.6746416" lon="139.7591443" timestamp="2019-01-08T21:25:00Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66141654" id="6193137765" lat="35.6746430" lon="139.7591613" timestamp="2019-01-08T21:25:00Z" uid="309382" user="Diego Sanguinetti" version="2"/>
   <node changeset="66140177" id="6193465454" lat="35.6747868" lon="139.7593124" timestamp="2019-01-08T20:21:28Z" uid="309382" user="Diego Sanguinetti" version="1"/>
@@ -9199,7 +9199,6 @@
     <tag k="operator" v="東京地下鉄"/>
     <tag k="public_transport" v="stop_position"/>
     <tag k="railway" v="stop"/>
-    <tag k="ref" v="C18"/>
     <tag k="subway" v="yes"/>
     <tag k="wikidata" v="Q801026"/>
     <tag k="wikipedia" v="ja:北千住駅"/>

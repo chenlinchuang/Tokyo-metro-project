@@ -154,8 +154,8 @@ get_ref_node_list = list(set(get_ref_node_list))
 #print(get_ref_node_list)
 
 #print(get_ref('明治神宮前〈原宿〉'))
-#for name in get_ref_node_list:
-    #ref_update(name,get_ref(name))
+for name in get_ref_node_list:
+    ref_update(name,get_ref(name))
 
 
 

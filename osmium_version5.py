@@ -221,10 +221,6 @@ def count_way_distance(ref1,ref2):
 
 
 
-
-
-
-
 def returndistance_dict():
 
     station_count = {'G':19, 'M':25, 'H':21, 'C':20, 'Y':24, 'Z':14, 'N':19, 'F':16, 'A':20, 'I':27, 'S':21}
