@@ -136,14 +136,13 @@ def ref_update(name,ref):
     ref_list = ref.split(';')
     for node_elem in root.findall('.//node'):
         for node in node_elem.findall('.//tag[@v = "'+ name +'"]'):
-            if node_elem.findall('.//tag[@v = "ref"]'):
+            if node.findall('.//tag[@k = "ref"]'):
                 break
             else:
                 if ref != '':
-                    ref_element = etree.SubElement('tag', {'k':'ref','v':ref})
-                    node_elem.append(ref_element)
+                    ref_element = etree.Element('tag', {'k':'ref','v':ref})
+                    node.append(ref_element)
     tree.write('export_new.osm',encoding="utf-8",pretty_print=True)
-
 
 get_ref_node_list =[]
 # find station without reference
@@ -154,9 +153,9 @@ for node in all_node_list:
 get_ref_node_list = list(set(get_ref_node_list))
 print(get_ref_node_list)
 
-
-for name in get_ref_node_list:
-    ref_update(name,get_ref(name))
+print(get_ref('明治神宮前〈原宿〉'))
+#for name in get_ref_node_list:
+    #ref_update(name,get_ref(name))
 
 
 

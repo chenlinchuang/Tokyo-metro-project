@@ -69,8 +69,6 @@ H.apply_file('export_new.osm')
 #print(WayHandler.all_way_dict)
 
 
-
-
 #print(RelationHandler.relation_way_dict)
 class Relation_way:
     def __init__(self,id,big_list):
@@ -229,7 +227,7 @@ def get_node_id(node_ref):
     '''
     for node in all_node_list:
         if node.ref != None:
-            if node.ref in node_ref:
+            if node_ref in node.ref:
                 return node.id
 def get_node_ref(node_id):
     '''
@@ -305,9 +303,9 @@ get_ref_node_list =[]
 for node in all_node_list:
     if node.ref == None and node.stop == 'stop_position':
         get_ref_node_list.append(node.name)
-print(len(get_ref_node_list))
+#print(len(get_ref_node_list))
 get_ref_node_list = list(set(get_ref_node_list))
-print(get_ref_node_list)
+#print(get_ref_node_list)
 
 # split station with multiple reference
 def ref_split(node):
@@ -338,8 +336,7 @@ for node in all_node_list:
 
 
 
-
-station_count = {'G':19, 'M':25, 'H':21, 'T':23, 'C':20, 'Y':24, 'Z':14, 'N':19, 'F':16, 'A':20, 'I':27, 'S':21}
+station_count = {'G':19, 'M':25, 'H':21, 'C':20, 'Y':24, 'Z':14, 'N':19, 'F':16, 'A':20, 'I':27, 'S':21}
 
 station_ref = {}
 for relation in station_count.keys():
@@ -348,10 +345,12 @@ for relation in station_count.keys():
         temp_list.append(relation + str(i+1).zfill(2))
         station_ref[relation] = temp_list
 
-distance = {}
 
+distance = {}
+#print(station_ref)
 #print(get_node_id(G_list[1]))\
 ref_miss_count = 0
+
 for relation in station_count.keys():
     temp_list = []
     for i,j in zip(range(len(station_ref[relation])-1),range(1,len(station_ref[relation]))):
@@ -359,22 +358,41 @@ for relation in station_count.keys():
             temp_list.append(countWaydistance(ReturnWay(get_node_id(station_ref[relation][i]),get_node_id(station_ref[relation][j]))))
         except ValueError:
             #print(station_ref[relation][i],station_ref[relation][j])
+            temp_list.append(None)
             pass
         except UnboundLocalError:
+            #print(station_ref[relation][i],station_ref[relation][j])
+            temp_list.append(None)
             ref_miss_count += 1
     distance[relation] = temp_list
-print(ref_miss_count)
-#print(ReturnWay(get_node_id('M08'),get_node_id('M09')))
 
+#print(distance)
+#print(ReturnWay(get_node_id('G18'),get_node_id('G19')))
+for distance_list in distance.values():
+    for i in range(len(distance_list)):
+        if distance_list[i] != None:
+            distance_list[i] = distance_list[i] / 12
+print(sum(distance['G'][:5])/60)            
+print(sum(distance['G'])/60)
+
+#print(distance)
 #for i in distance.keys():
-#    print(len(distance[i]))
+    #print(len(distance[i]))
 
 
 # Test
-#print(countWaydistance(ReturnWay(get_node_id('F10'),get_node_id('F11'))))
+#print(countWaydistance(ReturnWay(get_node_id('C02'),get_node_id('C03'))))
 
 
+def get_ref_from_name(name):
+    temp_ref_list =[]
+    for node in all_node_list:
+        if node.stop == 'stop_position':
+            if name in node.name:
+                temp_ref_list.append(node.ref)
+    return temp_ref_list,(';').join(temp_ref_list)
 
+#print(get_ref_from_name('押上'))
 '''
 1926376082
 for i in range(len(all_way_list)):
