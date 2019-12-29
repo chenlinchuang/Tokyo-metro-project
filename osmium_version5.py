@@ -5,9 +5,12 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 from io import StringIO, BytesIO
+import operator
+import random
+import csv
 def count_way_distance(ref1,ref2):
     
-    station_count = {'G':19, 'M':25, 'H':21, 'C':20, 'Y':24, 'Z':14, 'N':19, 'F':16, 'A':20, 'I':27, 'S':21}
+    station_count = {'G':19, 'M':25, 'H':21, 'C':20, 'T':23, 'E':38, 'Y':24, 'Z':14, 'N':19, 'F':16, 'A':20, 'I':27, 'S':21}
 
     class RelationHandler(o.SimpleHandler):
         relation_way_dict = {}
@@ -223,7 +226,7 @@ def count_way_distance(ref1,ref2):
 
 def returndistance_dict():
 
-    station_count = {'G':19, 'M':25, 'H':21, 'C':20, 'Y':24, 'Z':14, 'N':19, 'F':16, 'A':20, 'I':27, 'S':21}
+    station_count = {'G':19, 'M':25, 'H':21, 'C':20, 'T':23, 'E':38, 'Y':24, 'Z':14, 'N':19, 'F':16, 'A':20, 'I':27, 'S':21}
 
     class RelationHandler(o.SimpleHandler):
         relation_way_dict = {}
@@ -502,12 +505,14 @@ def returndistance_dict():
                 temp_list.append(None)
                 #ref_miss_count += 1
         distance[relation] = temp_list
-
+    for distance_list in distance.values():
+        for i in range(len(distance_list)):
+            if distance_list[i] == None:
+                distance_list[i] = random.uniform(108 * 12,160 * 12)
 
     for distance_list in distance.values():
         for i in range(len(distance_list)):
-            if distance_list[i] != None:
-                distance_list[i] = distance_list[i] / 12
+            distance_list[i] = distance_list[i] / 12
 
 
     return distance
@@ -551,7 +556,7 @@ def get_ref_from_name(name):
 
 def return_node_dict():
     
-    station_count = {'G':19, 'M':25, 'H':21, 'C':20, 'Y':24, 'Z':14, 'N':19, 'F':16, 'A':20, 'I':27, 'S':21}
+    
 
     class RelationHandler(o.SimpleHandler):
         relation_way_dict = {}
@@ -667,11 +672,33 @@ def return_node_dict():
         for relation_keys in RelationHandler.relation_node_dict.keys():
             if node.id in RelationHandler.relation_node_dict[relation_keys] and (node.stop == 'station' or node.stop == 'stop_position'):
                 node_class_dict[relation_keys].append(node)
+    temp_node_ref_list =[]
+    for key in node_class_dict.keys():
+        for node in node_class_dict[key]:
+            if node.ref == None:
+                node_class_dict[key].remove(node)
+        node_class_dict[key] = sorted(node_class_dict[key], key = operator.attrgetter('ref'))
 
     return node_class_dict
 
+
+
+
+station_count = {'G':19, 'M':25, 'H':21, 'T':23, 'C':20, 'Y':24, 'Z':14, 'N':19, 'F':16, 'E':38, 'S':21, 'I':27, 'A':20}
+distance = returndistance_dict()
+for value in distance.values():
+    for i in range(len(value)):
+        value[i] = int(value[i])
+with open('lines.csv','w',newline='') as csvfile:
+    writer = csv.writer(csvfile, delimiter = ';')
+    for relation in station_count.keys():
+        writerow = [relation,'01',station_count[relation]]
+        writerow.extend(distance[relation])
+        writer.writerow(writerow)
+
+
 if __name__ == "__main__":
-    print(returndistance_dict())
-    print(get_ref_from_name('新宿'))
-    print(return_node_dict())
-    print(returndistance_dict.countWaydistance([get_node_id('G04'), get_node_id('G09')]))
+    #print(returndistance_dict())
+    #print(get_ref_from_name('新宿'))
+    #print(return_node_dict())
+    print(count_way_distance('E04','E05'))
