@@ -520,6 +520,16 @@ def returndistance_dict():
 
 def get_ref_from_name(name):
 
+    if '駅' in name:
+        ind = name.index('駅')
+        name = name[:ind]
+    line_T = {'中野':['T01'],'落合':['T02'], '高田馬場':['T03'], '早稲田':['T04'], '神楽坂':['T05'], '飯田橋':['T06'],
+              '九段下':['T07'], '竹橋':['T08'], '大手町':['T09'], '日本橋':['T10'], '茅場町':['T11'], '門前仲町':['T12'],
+              '木場':['T13'], '東陽町':['T14'], '南砂町':['T15'], '西葛西':['T16'], '葛西':['T17'], '浦安':['T18'],
+              '南行徳':['T19'], '行徳':['T20'], '妙典':['T21'], '原木中山':['T22'], '西船橋':['T23']}
+    if name in line_T.keys():
+         return line_T[name]
+
     class Node:
         def __init__(self, id, name, location, ref, isTransferStation, stop):
             self.id = id
@@ -555,7 +565,6 @@ def get_ref_from_name(name):
 
 
 def return_node_dict():
-    
     
 
     class RelationHandler(o.SimpleHandler):
@@ -689,16 +698,16 @@ distance = returndistance_dict()
 for value in distance.values():
     for i in range(len(value)):
         value[i] = int(value[i])
-with open('lines.csv','w',newline='') as csvfile:
+with open('lines.csv','w+',newline='') as csvfile:
     writer = csv.writer(csvfile, delimiter = ';')
     for relation in station_count.keys():
         writerow = [relation,'01',station_count[relation]]
-        writerow.extend(distance[relation])
+        writerow.extend([round(x/60, 2) for x in distance[relation]])
         writer.writerow(writerow)
 
 
 if __name__ == "__main__":
     #print(returndistance_dict())
-    #print(get_ref_from_name('新宿'))
+    print(get_ref_from_name('本所吾妻橋駅'))
     #print(return_node_dict())
-    print(count_way_distance('E04','E05'))
+    print(count_way_distance('T04','T09'))
