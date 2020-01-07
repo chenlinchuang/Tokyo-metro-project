@@ -8,6 +8,9 @@ from io import StringIO, BytesIO
 import operator
 import random
 import csv
+import requests
+from bs4 import BeautifulSoup
+
 def count_way_distance(ref1,ref2):
     
     station_count = {'G':19, 'M':25, 'H':21, 'C':20, 'T':23, 'E':38, 'Y':24, 'Z':14, 'N':19, 'F':16, 'A':20, 'I':27, 'S':21}
@@ -225,6 +228,43 @@ def count_way_distance(ref1,ref2):
 
 
 def returndistance_dict():
+
+    line = ['A', 'I', 'S', 'E', 'G', 'M', 'H', 'T', 'C', 'Y', 'Z', 'N', 'F']
+    URL_list = ['https://zh.wikipedia.org/wiki/%E6%B7%BA%E8%8D%89%E7%B7%9A',
+                'https://zh.wikipedia.org/wiki/%E4%B8%89%E7%94%B0%E7%B7%9A_(%E9%83%BD%E7%87%9F%E5%9C%B0%E4%B8%8B%E9%90%B5)',
+                'https://zh.wikipedia.org/wiki/%E6%96%B0%E5%AE%BF%E7%B7%9A_(%E9%83%BD%E7%87%9F%E5%9C%B0%E4%B8%8B%E9%90%B5)',
+                'https://zh.wikipedia.org/wiki/%E5%A4%A7%E6%B1%9F%E6%88%B6%E7%B7%9A',
+                'https://zh.wikipedia.org/wiki/%E9%8A%80%E5%BA%A7%E7%B7%9A',
+                'https://zh.wikipedia.org/wiki/%E4%B8%B8%E4%B9%8B%E5%85%A7%E7%B7%9A',
+                'https://zh.wikipedia.org/wiki/%E6%97%A5%E6%AF%94%E8%B0%B7%E7%B7%9A',
+                'https://zh.wikipedia.org/wiki/%E6%9D%B1%E8%A5%BF%E7%B7%9A_(%E6%9D%B1%E4%BA%AC%E5%9C%B0%E4%B8%8B%E9%90%B5)',
+                'https://zh.wikipedia.org/wiki/%E5%8D%83%E4%BB%A3%E7%94%B0%E7%B7%9A',
+                'https://zh.wikipedia.org/wiki/%E6%9C%89%E6%A8%82%E7%94%BA%E7%B7%9A',
+                'https://zh.wikipedia.org/wiki/%E5%8D%8A%E8%97%8F%E9%96%80%E7%B7%9A',
+                'https://zh.wikipedia.org/wiki/%E5%8D%97%E5%8C%97%E7%B7%9A_(%E6%9D%B1%E4%BA%AC%E5%9C%B0%E4%B8%8B%E9%90%B5)',
+                'https://zh.wikipedia.org/wiki/%E5%89%AF%E9%83%BD%E5%BF%83%E7%B7%9A'
+                ]
+    missing_line = {}
+
+    for i in range(len(URL_list)):
+        temp_list =[]
+        res = requests.get(URL_list[i]).text
+        soup = BeautifulSoup(res,'lxml')
+        for items in soup.find('table', class_='wikitable').find_all('tr')[1::]:
+            #print(len(items))
+            if len(items) <=8:
+                continue
+            data = items.find_all(['td','th'])
+            #print(data)
+            if i == len(URL_list) -2 :
+                temp_list.append(data[5].text.strip())
+            else:
+                temp_list.append(data[4].text.strip())
+        missing_line[line[i]] = temp_list
+
+    for value in missing_line.values():
+        del value[0]
+
 
     station_count = {'G':19, 'M':25, 'H':21, 'C':20, 'T':23, 'E':38, 'Y':24, 'Z':14, 'N':19, 'F':16, 'A':20, 'I':27, 'S':21}
 
@@ -498,27 +538,52 @@ def returndistance_dict():
                 temp_list.append(countWaydistance(ReturnWay(get_node_id(station_ref[relation][i]),get_node_id(station_ref[relation][j]))))
             except ValueError:
                 #print(station_ref[relation][i],station_ref[relation][j])
-                temp_list.append(None)
+                temp_list.append(0)
                 pass
             except UnboundLocalError:
                 #print(station_ref[relation][i],station_ref[relation][j])
-                temp_list.append(None)
+                temp_list.append(0)
                 #ref_miss_count += 1
         distance[relation] = temp_list
-    for distance_list in distance.values():
-        for i in range(len(distance_list)):
-            if distance_list[i] == None:
-                distance_list[i] = random.uniform(108 * 12,160 * 12)
 
     for distance_list in distance.values():
         for i in range(len(distance_list)):
             distance_list[i] = distance_list[i] / 12
 
+    station_count = {'G':19, 'M':25, 'H':21, 'T':23, 'C':20, 'Y':24, 'Z':14, 'N':19, 'F':16, 'E':38, 'S':21, 'I':27, 'A':20}
 
+    for key in distance.keys():
+        for i in range(len(distance[key])):
+            if distance[key][i] == 0 or distance[key][i] >= 2000:
+                try:
+                    distance[key][i] = int(float(missing_line[key][i]) * 80)
+                except KeyError:
+                    print(missing_line[key],distance[key][i])
+    for value in distance.values():
+        for i in range(len(value)):
+            value[i] = int(value[i])
+    with open('lines.csv','w+',newline='') as csvfile:
+        writer = csv.writer(csvfile, delimiter = ';')
+        for relation in station_count.keys():
+            writerow = [relation,'01',station_count[relation]]
+            writerow.extend([round(x/60, 2) for x in distance[relation]])
+            writer.writerow(writerow)
+    
+    
     return distance
 
 
 def get_ref_from_name(name):
+
+    if '駅' in name:
+        ind = name.index('駅')
+        name = name[:ind]
+    line_T = {'中野':['T01'],'落合':['T02'], '高田馬場':['T03'], '早稲田':['T04'], '神楽坂':['T05'], '飯田橋':['T06'],
+              '九段下':['T07'], '竹橋':['T08'], '大手町':['T09'], '日本橋':['T10'], '茅場町':['T11'], '門前仲町':['T12'],
+              '木場':['T13'], '東陽町':['T14'], '南砂町':['T15'], '西葛西':['T16'], '葛西':['T17'], '浦安':['T18'],
+              '南行徳':['T19'], '行徳':['T20'], '妙典':['T21'], '原木中山':['T22'], '西船橋':['T23']}
+    if name in line_T.keys():
+         return line_T[name]
 
     class Node:
         def __init__(self, id, name, location, ref, isTransferStation, stop):
@@ -544,13 +609,14 @@ def get_ref_from_name(name):
     N = NodeHandler()
     N.apply_file('export_new.osm')
 
-
     temp_ref_list =[]
     for node in all_node_list:
-        if node.stop == 'stop_position':
-            if name in node.name:
-                temp_ref_list.append(node.ref)
-
+        if node.stop == 'stop_position' or 'station':
+            try:
+                if name in node.name:
+                    temp_ref_list.append(node.ref)
+            except TypeError:
+                pass
     return temp_ref_list
 
 
@@ -578,7 +644,7 @@ def return_node_dict():
             RelationHandler.relation_node_dict[w.tags.get('ref')] = node_id_list
 
     class Node:
-        def __init__(self, id, name, location, ref, isTransferStation, stop, index=None):
+        def __init__(self, id, name, location, ref, isTransferStation, stop, index=None, wiki_data=None):
             self.id = id
             self.name = name
             self.location = location
@@ -586,6 +652,7 @@ def return_node_dict():
             self.isTransferStation = isTransferStation
             self.stop = stop
             self.index = index
+            self.wiki = wiki_data
     
         def get_start_end(self,relation_ref):
             self.start = relation_ref + '01'
@@ -603,7 +670,7 @@ def return_node_dict():
             #if w.tags.get('ref') == None and w.tags.get('name') != None:
                 #print(w.tags.get('name'))
             #if w.tags.get('ref') != None:
-            all_node_list.append(Node(w.id, w.tags.get('name'), w.location, w.tags.get('ref'), False, w.tags.get('public_transport')))
+            all_node_list.append(Node(w.id, w.tags.get('name'), w.location, w.tags.get('ref'), False, w.tags.get('public_transport')),w.tags.get('wikidata'))
 
     class WayHandler(o.SimpleHandler):
         all_way_dict = {}
@@ -684,21 +751,12 @@ def return_node_dict():
 
 
 
-station_count = {'G':19, 'M':25, 'H':21, 'T':23, 'C':20, 'Y':24, 'Z':14, 'N':19, 'F':16, 'E':38, 'S':21, 'I':27, 'A':20}
-distance = returndistance_dict()
-for value in distance.values():
-    for i in range(len(value)):
-        value[i] = int(value[i])
-with open('lines.csv','w',newline='') as csvfile:
-    writer = csv.writer(csvfile, delimiter = ';')
-    for relation in station_count.keys():
-        writerow = [relation,'01',station_count[relation]]
-        writerow.extend(distance[relation])
-        writer.writerow(writerow)
+
 
 
 if __name__ == "__main__":
     #print(returndistance_dict())
-    #print(get_ref_from_name('新宿'))
+    print(get_ref_from_name('本所吾妻橋'))
+    print(returndistance_dict())
     #print(return_node_dict())
-    print(count_way_distance('E04','E05'))
+    #print(count_way_distance('E04','E05'))
