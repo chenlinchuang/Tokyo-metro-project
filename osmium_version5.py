@@ -556,7 +556,7 @@ def returndistance_dict():
         for i in range(len(distance[key])):
             if distance[key][i] == 0 or distance[key][i] >= 2000:
                 try:
-                    distance[key][i] = int(float(missing_line[key][i]) * 80)
+                    distance[key][i] = int(float(missing_line[key][i]) * 100)
                 except KeyError:
                     print(missing_line[key],distance[key][i])
     for value in distance.values():
