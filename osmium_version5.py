@@ -22,7 +22,7 @@ def count_way_distance(ref1,ref2):
         temp_dict = eval(fobj.readline())
     for keys in temp_dict.keys():
         if ref1[0] == keys:
-            return temp_dict[keys][index1-1]
+            return sum(temp_dict[keys][index1-1:index2-1])
 
 
 def returndistance_dict():
@@ -559,4 +559,4 @@ if __name__ == "__main__":
         #fobj.write(str(returndistance_dict()))
     
     #print(return_node_dict())
-    print(count_way_distance('I13','I14'))
+    print(count_way_distance('I01','I03'))
