@@ -622,7 +622,6 @@ def get_ref_from_name(name):
 
 def return_node_dict():
     
-    
 
     class RelationHandler(o.SimpleHandler):
         relation_way_dict = {}
@@ -751,12 +750,32 @@ def return_node_dict():
 
 
 
+<<<<<<< HEAD
 
+=======
+station_count = {'G':19, 'M':25, 'H':21, 'T':23, 'C':20, 'Y':24, 'Z':14, 'N':19, 'F':16, 'E':38, 'S':21, 'I':27, 'A':20}
+distance = returndistance_dict()
+for value in distance.values():
+    for i in range(len(value)):
+        value[i] = int(value[i])
+with open('lines.csv','w+',newline='') as csvfile:
+    writer = csv.writer(csvfile, delimiter = ';')
+    for relation in station_count.keys():
+        writerow = [relation,'01',station_count[relation]]
+        writerow.extend([round(x/60, 2) for x in distance[relation]])
+        writer.writerow(writerow)
+>>>>>>> b8c8b907c1869769fbcab98e9c1c0037509e7e91
 
 
 if __name__ == "__main__":
     #print(returndistance_dict())
+<<<<<<< HEAD
     print(get_ref_from_name('本所吾妻橋'))
     print(returndistance_dict())
     #print(return_node_dict())
     #print(count_way_distance('E04','E05'))
+=======
+    print(get_ref_from_name('本所吾妻橋駅'))
+    #print(return_node_dict())
+    print(count_way_distance('T04','T09'))
+>>>>>>> b8c8b907c1869769fbcab98e9c1c0037509e7e91
