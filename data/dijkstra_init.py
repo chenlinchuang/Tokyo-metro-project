@@ -233,10 +233,11 @@ def API():
     tk.Label(key_window, text='remaining times: %d' % times, font=('Arial', 13),fg='green').grid(row=2, column=0,sticky='w',columnspan=2)
     tk.Label(key_window, text='''If you want get unlimited times to use the feature of entering arbitary location,''', font=('Arial', 13)).grid(row=3, column=0,sticky='w',columnspan=2)
     tk.Label(key_window, text= 'please enter your google api key', font=('Arial', 13)).grid(row=4, column=0,sticky='w',columnspan=2)
-    tk.Entry(key_window, textvariable=client_key, width=50).grid(row=5, column=0,sticky='w')
+    ttk.Entry(key_window, textvariable=client_key, width=50).grid(row=5, column=0,sticky='w')
 
-    ok_button = tk.Button(key_window, text='finish', bg='deep sky blue', font=('Arial',13),
-                            fg='white',command=partial(callbutton, key_window), width=9)
+    ok_button = ttk.Button(key_window, text='finish', command=partial(callbutton, key_window))
+                            #bg='deep sky blue', font=('Arial',13),
+                            #fg='white')
     ok_button.grid(row=6, column=0,sticky='w')
     more = tk.Label(key_window, text='What is google api key?', fg='blue')
     more.bind('<Enter>', lambda e:more.config(cursor='hand2'))
@@ -263,13 +264,13 @@ tk.Label(window, text='To',fg='white', bg='medium violet red',
 #entry for start and end
 svar = tk.StringVar()
 svar.set('G01')
-start_entry = tk.Entry(window, textvariable=svar)
-start_entry.place(x=80,y=0)
+start_entry = ttk.Entry(window, textvariable=svar)
+start_entry.place(x=70,y=3, anchor='nw')
 
 evar = tk.StringVar()
 evar.set('淺草寺')
-end_entry = tk.Entry(window, textvariable=evar)
-end_entry.place(x=80,y=35)
+end_entry = ttk.Entry(window, textvariable=evar)
+end_entry.place(x=70,y=32,anchor='nw')
 
 #walk image
 walk = Image.open(current_path +'walking.png')
@@ -828,11 +829,11 @@ def network_map():
 
 direct=tk.IntVar()
 html = tk.IntVar()
-checkbox_dir = tk.Checkbutton(window, text='show directions',variable=direct,font=('Arial',13),
-                                activeforeground='deep sky blue')
+checkbox_dir = tk.Checkbutton(window, text='show directions',variable=direct
+                                ,font=('Arial',13),activeforeground='deep sky blue')
 
-checkbox_map = tk.Checkbutton(window, text='show map',variable=html,font=('Arial',13),
-                                activeforeground='medium violet red')
+checkbox_map = tk.Checkbutton(window, text='show map',variable=html
+                                ,font=('Arial',13),activeforeground='medium violet red')
 
 if check_internet():
     checkbox_dir.place(x=300, y=0, anchor='nw')
@@ -843,8 +844,8 @@ insert_button = tk.Button(window, text='search', bg='deep sky blue', font=('Aria
                           fg='white', command=enter, width=9)
 insert_button.place(x=110, y=60)
 
-clear_button = tk.Button(window, text='clear', width=9, font=('Arial',13),
-                          bg='lavender', command=clear)
+clear_button = tk.Button(window, text='clear',command=clear, width=9,
+                          bg='lavender', font=('Arial',13))
 clear_button.place(x=10,y=60)
 
 switch_button = tk.Button(window,image=img, width=40, height=40, command=switch, anchor='nw')
