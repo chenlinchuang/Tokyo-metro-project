@@ -365,6 +365,8 @@ def returndistance_dict():
             writerow = [relation,'01',station_count[relation]]
             writerow.extend([round(x/60, 2) for x in distance[relation]])
             writer.writerow(writerow)
+    with open('lines.csv','a',) as csvfile:
+        csvfile.write('Mb;03;05;2.23;1.031')
 
     for distance_list in distance.values():
         for i in range(len(distance_list)):
