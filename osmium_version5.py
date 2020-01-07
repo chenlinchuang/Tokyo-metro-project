@@ -23,6 +23,7 @@ def count_way_distance(ref1,ref2):
     for keys in temp_dict.keys():
         if ref1[0] == keys:
             return sum(temp_dict[keys][index1-1:index2-1])
+''
 
 
 def returndistance_dict():
